@@ -1,6 +1,6 @@
-# POP — Pratyush Singh
+# Pratyush Singh — Portfolio
 
-A loud, colourful neo-brutalist portfolio built around a **sticky project showcase**. Conventional to navigate, deliberately not conventional to look at.
+A dark, minimal portfolio (pure black, hairline borders, one indigo accent) built around a **sticky project showcase**. Conventional to navigate, deliberately not conventional to look at.
 
 **Stack:** React 18 · Vite · Framer Motion.
 

@@ -32,7 +32,7 @@ export default function Hero() {
               <motion.span className="hero-line-in" custom={i} variants={line} initial="hidden" animate="show">
                 {i === 1 ? (
                   <>
-                    shipped to the <span className="serif grad">cloud.</span>
+                    shipped to the <span className="grad">cloud.</span>
                   </>
                 ) : (
                   l
@@ -67,12 +67,6 @@ export default function Hero() {
         </div>
 
         <motion.div className="hero-console" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}>
-          <svg className="spin-badge" viewBox="0 0 120 120" aria-hidden="true">
-            <defs><path id="spin-path" d="M60,60 m-43,0 a43,43 0 1,1 86,0 a43,43 0 1,1 -86,0" /></defs>
-            <circle cx="60" cy="60" r="58" />
-            <text><textPath href="#spin-path" textLength="262">OPEN TO WORK ✦ SDE ✦ CLOUD ✦ 2027 ✦</textPath></text>
-            <text className="spin-badge-c" x="60" y="72" textAnchor="middle">★</text>
-          </svg>
           <Tilt><DeployConsole /></Tilt>
         </motion.div>
         </div>
