@@ -889,3 +889,29 @@
 }
 
 .hero-grid > * { min-width: 0; }
+
+/* ============================================================
+   Loader — outlined name that fills, then the screen parts
+   ============================================================ */
+.loader { background: transparent; padding: 0; }
+.loader-panel { position: absolute; left: 0; right: 0; height: 50.5%; background: #000; }
+.loader-panel.top { top: 0; }
+.loader-panel.bottom { bottom: 0; }
+.loader-inner { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 clamp(20px, 5vw, 56px); }
+.loader-inner::before { content: ''; position: absolute; left: 50%; top: 50%; width: min(90vw, 900px); height: 420px; transform: translate(-50%, -50%); background: radial-gradient(closest-side, rgba(165, 180, 252, 0.16), transparent); pointer-events: none; }
+
+.loader-name { position: relative; font-size: clamp(2.5rem, 11.4vw, 10rem); font-weight: 600; letter-spacing: -0.055em; line-height: 1.05; white-space: nowrap; }
+.ln-outline { display: block; color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3); }
+.ln-fill { position: absolute; inset: 0; color: #fff; transition: clip-path 0.22s linear; text-shadow: 0 0 60px rgba(165, 180, 252, 0.45); }
+
+.loader-steps { position: relative; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px clamp(14px, 3vw, 36px); margin-top: clamp(22px, 4vw, 44px); font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: #4a4a4a; }
+.loader-steps span { display: inline-flex; align-items: center; gap: 8px; transition: color 0.35s; }
+.loader-steps i { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+.loader-steps .done { color: var(--muted); }
+.loader-steps .now { color: #fff; }
+.loader-steps .now i { box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.14); animation: ping 1s infinite; }
+
+.loader-count { position: absolute; right: clamp(24px, 5vw, 56px); bottom: clamp(26px, 5vw, 44px); font-size: 0.8rem; letter-spacing: 0.1em; color: #fff; font-variant-numeric: tabular-nums; }
+.loader-count i { font-style: normal; color: var(--faint); margin-left: 2px; }
+.loader-line { height: 2px; }
+.loader-line span { background: linear-gradient(90deg, rgba(255, 255, 255, 0.4), #fff); box-shadow: 0 0 14px rgba(255, 255, 255, 0.7); }
