@@ -14,7 +14,7 @@ export default function Credentials() {
         <div className="cert-grid">
           {certifications.map((c, i) => (
             <Reveal key={c.title} delay={0.05 + i * 0.05}>
-              <SpotlightCard className={`cert ${c.featured ? 'featured' : ''}`}>
+              <SpotlightCard as="a" href={c.url} target="_blank" rel="noreferrer" className={`cert ${c.featured ? 'featured' : ''}`}>
                 <div className="cert-top">
                   <span className="cert-badge" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none">
@@ -25,7 +25,7 @@ export default function Credentials() {
                   <span className="cert-org mono">{c.org}</span>
                 </div>
                 <h3 className="cert-title">{c.title}</h3>
-                <span className="cert-code mono">{c.code}</span>
+                <span className="cert-code mono">{c.code} <i className="cert-open">View ↗</i></span>
               </SpotlightCard>
             </Reveal>
           ))}

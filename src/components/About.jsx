@@ -22,7 +22,7 @@ export default function About() {
         <Reveal><span className="eyebrow">01 — About</span></Reveal>
         <Reveal delay={0.05}>
           <h2 className="h2">
-            I like problems that live<br />between the <span className="serif grad">app and the server.</span>
+            I like problems that live<br />between the <span className="serif grad">app and the cloud.</span>
           </h2>
         </Reveal>
 
@@ -30,9 +30,9 @@ export default function About() {
           <Reveal delay={0.1} className="about-copy">
             <p className="lead">{profile.summary}</p>
             <p className="about-note">
-              Currently finishing a B.Tech in Computer Science at VIT Bhopal, specializing in
-              Cloud Computing &amp; Automation — and holding <strong>AWS Solutions Architect</strong> and
-              <strong> Cloud Practitioner</strong> certifications.
+              Proficient in <strong>AWS, Docker, Git and GitHub</strong>, with a strong backend
+              foundation in <strong>Node.js, REST APIs and PostgreSQL</strong>. Graduating from
+              VIT Bhopal in May 2027 — and solving DSA problems in between deploys.
             </p>
           </Reveal>
 

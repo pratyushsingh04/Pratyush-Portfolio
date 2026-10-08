@@ -335,3 +335,99 @@
   .ach-place { grid-column: 2; }
   .footer { flex-direction: column; text-align: center; }
 }
+
+
+/* ============================================================
+   Hero — copy + deploy console
+   ============================================================ */
+.hero-row { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(28px, 5vw, 64px); align-items: start; margin-top: 26px; }
+.hero-row .hero-sub { margin-top: 0; }
+
+.console {
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: linear-gradient(170deg, rgba(23, 17, 31, 0.92), rgba(11, 7, 16, 0.92));
+  box-shadow: 0 40px 90px -40px rgba(244, 63, 94, 0.45), 0 0 0 1px rgba(247, 243, 238, 0.02) inset;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+.console-bar { display: flex; align-items: center; gap: 14px; padding: 12px 16px; border-bottom: 1px solid var(--line-2); }
+.console-dots { display: inline-flex; gap: 6px; }
+.console-dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--line); }
+.console-dots i:first-child { background: var(--rose); }
+.console-dots i:nth-child(2) { background: var(--amber); }
+.console-dots i:last-child { background: var(--violet); }
+.console-title { font-size: 0.68rem; color: var(--cream-3); letter-spacing: 0.04em; }
+.console-body { padding: 16px 18px 18px; font-size: 0.8rem; line-height: 1.95; color: var(--cream-2); }
+.cl { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cl-prompt { color: var(--rose); }
+.cl-out { color: var(--cream-3); }
+.cl-ok { display: grid; grid-template-columns: 14px 34px 1fr 14px auto; gap: 8px; align-items: baseline; }
+.cl-tick { color: var(--amber); }
+.cl-k { color: var(--cream-3); }
+.cl-txt { color: var(--cream); overflow: hidden; text-overflow: ellipsis; }
+.cl-arrow { color: var(--cream-3); }
+.cl-to { color: var(--amber); }
+.cl-live { color: var(--cream-3); }
+.cl-live .cl-txt { margin-left: 6px; }
+.cl-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.16); margin-right: 6px; animation: ping 2.4s infinite; }
+.cl-caret { display: inline-block; width: 7px; height: 1.05em; background: var(--amber); vertical-align: text-bottom; margin-left: 2px; animation: caret 1s steps(1) infinite; }
+@keyframes caret { 50% { opacity: 0; } }
+
+/* ============================================================
+   Work — project visuals + links
+   ============================================================ */
+.arch { display: flex; align-items: stretch; margin-top: 16px; position: relative; }
+.arch-node { flex: 1 1 0; min-width: 0; padding: 10px 6px; border-radius: var(--radius-sm); border: 1px solid var(--line); background: rgba(11, 7, 16, 0.5); text-align: center; }
+.arch-k { display: block; font-weight: 700; font-size: 0.82rem; letter-spacing: -0.01em; }
+.arch-v { display: block; font-size: 0.58rem; color: var(--cream-3); margin-top: 3px; line-height: 1.4; }
+.arch-link { flex: 0 0 76px; display: flex; flex-direction: column; justify-content: center; gap: 5px; }
+.arch-link-l { font-size: 0.52rem; letter-spacing: 0.04em; color: var(--cream-3); text-align: center; white-space: nowrap; }
+.arch-wire { position: relative; height: 1px; background: var(--line); }
+.arch-wire i { position: absolute; top: -2px; left: 0; width: 5px; height: 5px; border-radius: 50%; background: var(--amber); animation: packet 2.2s linear infinite; }
+.arch-wire i:last-child { background: var(--rose); animation-direction: reverse; animation-delay: -1.1s; }
+@keyframes packet { from { left: 0; opacity: 0; } 15%, 85% { opacity: 1; } to { left: calc(100% - 5px); opacity: 0; } }
+
+.score { margin-top: 16px; position: relative; padding: 14px; border-radius: var(--radius-sm); border: 1px solid var(--line); background: rgba(11, 7, 16, 0.5); }
+.score-head { display: flex; align-items: baseline; gap: 8px; }
+.score-n { font-size: 1.9rem; line-height: 1; }
+.score-l { font-size: 0.62rem; color: var(--cream-3); letter-spacing: 0.06em; }
+.score-rows { display: grid; gap: 7px; margin-top: 12px; }
+.score-row { display: grid; grid-template-columns: 92px 1fr 22px; gap: 10px; align-items: center; }
+.score-k { font-size: 0.64rem; color: var(--cream-2); }
+.score-track { height: 4px; border-radius: 4px; background: var(--line-2); overflow: hidden; }
+.score-fill { display: block; height: 100%; border-radius: 4px; background: var(--sun); transform-origin: left; }
+.score-v { font-size: 0.64rem; color: var(--cream-2); text-align: right; }
+
+.pin-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 14px; position: relative; }
+.pin-foot .pin-period { margin-top: 0; }
+.pin-links { display: inline-flex; gap: 8px; font-size: 0.72rem; }
+.pin-links a { padding: 6px 13px; border-radius: 999px; border: 1px solid var(--line); color: var(--cream); transition: border-color 0.3s, color 0.3s, filter 0.3s; }
+.pin-links a:first-child { background: var(--sun); color: #1a0d06; border-color: transparent; font-weight: 500; }
+.pin-links a:hover { border-color: var(--amber); color: var(--amber); }
+.pin-links a:first-child:hover { color: #1a0d06; border-color: transparent; filter: brightness(1.08); }
+.pin-links i { font-style: normal; }
+
+/* Credentials — two certificates, linked */
+.cert-grid { grid-template-columns: 1fr 1fr; }
+a.cert { display: block; }
+.cert-code { display: flex; justify-content: space-between; gap: 10px; }
+.cert-open { font-style: normal; color: var(--amber); opacity: 0; transform: translateX(-6px); transition: opacity 0.3s, transform 0.3s var(--ease); }
+.cert:hover .cert-open, .cert:focus-visible .cert-open { opacity: 1; transform: none; }
+@media (hover: none) { .cert-open { opacity: 1; transform: none; } }
+
+@media (max-width: 1040px) {
+  .hero-row { grid-template-columns: 1fr; }
+  .hero-console { max-width: 560px; }
+}
+@media (max-width: 900px), (max-height: 760px) {
+  .pin-sticky { position: relative; top: 0; }
+}
+@media (max-width: 620px) {
+  .cert-grid { grid-template-columns: 1fr; }
+  .console-body { font-size: 0.7rem; padding: 14px; }
+  .cl-ok { grid-template-columns: 12px 28px 1fr 12px auto; gap: 6px; }
+  .arch-link { flex-basis: 58px; }
+  .arch-node { padding: 10px 4px; }
+  .arch-link-l { font-size: 0.46rem; }
+}

@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { profile, marquee } from '../data'
 import Magnetic from './Magnetic'
+import DeployConsole from './DeployConsole'
 
 const line = {
   hidden: { y: '110%' },
@@ -40,9 +41,11 @@ export default function Hero() {
           ))}
         </h1>
 
+        <div className="hero-row">
+        <div className="hero-copy">
         <motion.p className="hero-sub" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.85, duration: 0.7 }}>
-          I'm <strong>{profile.name}</strong> — a {profile.role.toLowerCase()} who builds
-          multi-tenant platforms, real-time features and REST APIs, then deploys them on AWS.
+          I'm <strong>{profile.name}</strong> — a {profile.role.toLowerCase()} who builds secure,
+          multi-tenant platforms, real-time services and REST APIs, then deploys them on AWS.
         </motion.p>
 
         <motion.div className="hero-cta" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1, duration: 0.7 }}>
@@ -60,6 +63,12 @@ export default function Hero() {
             <a href={profile.links.leetcode} target="_blank" rel="noreferrer">LeetCode</a>
           </div>
         </motion.div>
+        </div>
+
+        <motion.div className="hero-console" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}>
+          <DeployConsole />
+        </motion.div>
+        </div>
       </motion.div>
 
       <div className="hero-marquee" aria-hidden="true">

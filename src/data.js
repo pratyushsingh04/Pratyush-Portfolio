@@ -4,7 +4,7 @@ export const profile = {
   name: 'Pratyush Singh',
   first: 'Pratyush',
   last: 'Singh',
-  role: 'Full-Stack & Cloud Engineer',
+  role: 'Cloud & Full-Stack Engineer',
   location: 'Bhopal, India',
   email: 'pratyushsingh604@gmail.com',
   phone: '+91 70547 35054',
@@ -12,129 +12,175 @@ export const profile = {
   status: 'Open to SDE & Cloud roles',
   headline: ['Full-stack products,', 'shipped to the cloud.'],
   summary:
-    'Computer Science student specializing in Cloud Computing & Automation, with hands-on experience across full-stack development, cloud infrastructure and AI-driven applications. I build with React, Node.js, Python and REST APIs — and deploy on AWS and GCP.',
+    'Computer Science Engineering student specializing in Cloud Computing and Automation, with hands-on experience in cloud platforms, containerization and deploying production web applications on the cloud. I build and deploy secure, multi-tenant cloud applications with authentication, role-based access control and real-time services.',
   links: {
-    // TODO: replace with your real profile URLs.
-    github: 'https://github.com/',
-    linkedin: 'https://www.linkedin.com/',
-    leetcode: 'https://leetcode.com/',
+    github: 'https://github.com/pratyushsingh04',
+    linkedin: 'https://www.linkedin.com/in/pratyush-singh-28411328a/',
+    leetcode: 'https://leetcode.com/u/Pratyush23__/',
   },
 }
 
 export const stats = [
-  { value: 40, suffix: '+', label: 'REST endpoints built' },
+  { value: 85, suffix: '+', label: 'REST endpoints shipped' },
   { value: 300, suffix: '+', label: 'DSA problems solved' },
-  { value: 4, suffix: '', label: 'Certifications earned' },
+  { value: 5, suffix: '★', label: 'C++ on HackerRank' },
   { value: 8, suffix: '.00', label: 'CGPA at VIT Bhopal' },
 ]
 
-export const marquee = ['React.js', 'Node.js', 'Express', 'Python', 'MongoDB', 'PostgreSQL', 'AWS', 'Docker', 'FastAPI', 'Socket.IO', 'MySQL', 'Flask']
+export const marquee = ['AWS EC2', 'Docker', 'Next.js', 'TypeScript', 'Node.js', 'Express', 'PostgreSQL', 'Prisma', 'Socket.IO', 'React.js', 'Python', 'FastAPI', 'MongoDB', 'Vercel', 'Neon']
+
+// Lines the hero console types out — the real WorkNest deployment.
+export const consoleLines = [
+  { t: 'cmd', text: 'whoami' },
+  { t: 'out', text: "pratyush · cloud & full-stack engineer · VIT Bhopal '27" },
+  { t: 'cmd', text: 'deploy worknest --prod' },
+  { t: 'ok', k: 'web', text: 'Next.js', to: 'Vercel' },
+  { t: 'ok', k: 'api', text: 'Express · Socket.IO', to: 'AWS EC2' },
+  { t: 'ok', k: 'db', text: 'PostgreSQL · Prisma', to: 'Neon' },
+  { t: 'live', text: '85+ endpoints · 23 models · 4 roles' },
+]
 
 export const projects = [
   {
-    id: 'devsync',
+    id: 'worknest',
     index: '01',
-    name: 'DevSync',
-    kind: 'Multi-tenant SaaS · Real-time',
-    period: 'May 2026 — Present',
-    tagline: 'A multi-tenant project platform with real-time collaboration, built secure from the very first request.',
+    name: 'WorkNest',
+    kind: 'Multi-tenant cloud SaaS · Real-time',
+    period: 'Oct 2025 — Present',
+    tagline: 'One workspace for service companies — HR, project delivery and a client portal, isolated per tenant and deployed on AWS.',
     accent: 'rose',
+    visual: 'arch',
+    links: {
+      live: 'https://worknest-snowy-five.vercel.app',
+      code: 'https://github.com/pratyushsingh04/worknest',
+    },
     points: [
       {
-        h: 'Four-level tenancy, zero IDOR',
-        p: 'Architected an Organization → Team → Project → Task hierarchy spanning 40+ REST endpoints across 10+ modular services, deriving authorization from each resource so no user can reach another tenant’s data.',
+        h: '85+ endpoints on a 23-model schema',
+        p: 'Built and deployed a multi-tenant cloud SaaS workspace unifying HR, project delivery and a client portal for service companies, exposing 85+ REST API endpoints across 18 Express modules on a 23-model PostgreSQL schema via Prisma.',
       },
       {
-        h: 'Stateless JWT with silent refresh',
-        p: 'Engineered 15-minute access tokens with 7-day httpOnly refresh-token rotation, enabling silent session restore through Axios interceptors (401 → refresh → retry) on bcrypt-hashed credentials.',
+        h: 'Four roles, every tenant isolated',
+        p: 'Implemented JWT authentication in httpOnly cookies with bcrypt hashing and role-based access control for 4 roles — Admin, Manager, Employee and Client — isolating tenants by scoping every query to a company ID.',
       },
       {
-        h: 'Role-based access, provably enforced',
-        p: 'Hardened owner/member RBAC through layered Express middleware, validated by 50+ automated authorization tests with zero access-control failures.',
+        h: 'Onboarding hardened end to end',
+        p: 'Secured onboarding with single-use SHA-256-hashed invite and password-reset tokens, brute-force rate limiting (15-minute lockout after 8 failed sign-ins), Zod schema validation and searchable audit logs.',
       },
       {
-        h: 'Three live features over WebSockets',
-        p: 'Orchestrated a Socket.IO real-time layer powering notifications, drag-and-drop Kanban sync and team chat, scoped to isolated per-organization rooms.',
+        h: 'Real-time over authenticated WebSockets',
+        p: 'Built a real-time layer with Socket.IO over cookie-authenticated WebSockets and isolated per-project rooms, live-syncing a drag-and-drop Kanban board, activity feeds, attendance and notifications.',
       },
       {
-        h: 'Shipped to production',
-        p: 'Deployed the full stack across Render, Vercel and MongoDB Atlas with production CORS, rate limiting and Zod schema validation on every route.',
+        h: 'Geofencing, an AI assistant, and AWS',
+        p: 'Developed geofenced attendance (Haversine distance), leave-approval workflows and an AI assistant using LLM tool calling (Gemini/Groq). The Node.js/Express backend runs on AWS EC2, with a Vercel frontend and Neon serverless PostgreSQL.',
       },
     ],
     metrics: [
-      { k: '40+', v: 'REST endpoints' },
-      { k: '4', v: 'tenancy levels' },
-      { k: '50+', v: 'authz tests' },
-      { k: '0', v: 'access failures' },
+      { k: '85+', v: 'REST endpoints' },
+      { k: '23', v: 'Prisma models' },
+      { k: '18', v: 'Express modules' },
+      { k: '4', v: 'RBAC roles' },
     ],
-    stack: ['React', 'Node.js', 'Express', 'MongoDB', 'Socket.IO', 'JWT', 'Zod'],
+    stack: ['Next.js', 'TypeScript', 'Node.js', 'Express', 'PostgreSQL', 'Prisma', 'Socket.IO', 'JWT'],
   },
   {
-    id: 'ems',
+    id: 'wardrobe-ai',
     index: '02',
-    name: 'Employee Management System',
-    kind: 'Full-stack HR platform',
-    period: 'Aug 2025',
-    tagline: 'A role-based HR platform covering the entire employee lifecycle — records, projects, tasks, leave and payroll.',
+    name: 'Wardrobe AI',
+    kind: 'Multimodal AI · Full-stack',
+    period: 'Oct 2026',
+    tagline: 'An AI outfit assistant that looks at a photo of what you are wearing and scores it for the occasion.',
     accent: 'amber',
+    visual: 'score',
+    links: {
+      live: 'https://wardrobe-ai-pearl.vercel.app',
+      code: 'https://github.com/pratyushsingh04/wardrobe-ai',
+    },
     points: [
       {
-        h: 'Six operational modules',
-        p: 'Built a full-stack system covering employee records, departments, projects, tasks, leave and payroll operations in one place.',
+        h: 'A photo in, a 0–100 score out',
+        p: 'Developed an AI-powered outfit assistant that analyzes an uploaded outfit photo with a multimodal vision LLM and returns a 0–100 suitability score across 4 dimensions: formality, coordination, weather and event context.',
       },
       {
-        h: 'Three roles, three dashboards',
-        p: 'Implemented authentication and role-based access control for Admin, HR and Employee, each with role-specific dashboards and permissions.',
+        h: 'One AI layer, two providers',
+        p: 'Engineered a provider-agnostic cloud AI layer integrating Google Gemini and Anthropic Claude APIs with Zod-validated structured JSON output, ensuring type-safe responses and consistent error handling across both providers.',
       },
       {
-        h: 'REST APIs end to end',
-        p: 'Developed RESTful APIs with Node.js and Express.js for employee management, project tracking, task assignment and organizational workflows.',
+        h: 'A closet that tags itself',
+        p: 'Built a digital closet with automatic AI tagging of category, color, fabric, season and occasion, plus outfit recommendations with a rule-based fallback that keeps suggestions working when the AI is unavailable.',
       },
       {
-        h: 'Modelled for real workflows',
-        p: 'Designed MongoDB schemas and database operations for users, employees, projects, tasks and company-wide data.',
+        h: 'Five routes, live weather, lean uploads',
+        p: 'Designed 5 REST API routes with the Next.js App Router and SQLite, integrated live weather from the cloud-based Open-Meteo API, and added client-side image compression to keep photo uploads under the 5 MB limit.',
       },
     ],
     metrics: [
-      { k: '3', v: 'user roles' },
-      { k: '6', v: 'modules' },
-      { k: 'REST', v: 'API design' },
-      { k: 'RBAC', v: 'enforced' },
+      { k: '0–100', v: 'suitability score' },
+      { k: '4', v: 'scoring dimensions' },
+      { k: '2', v: 'LLM providers' },
+      { k: '5', v: 'API routes' },
     ],
-    stack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'REST APIs'],
+    stack: ['Next.js', 'React', 'TypeScript', 'Gemini API', 'Claude API', 'SQLite', 'Zod', 'Tailwind CSS'],
   },
+]
+
+// WorkNest's deployed topology, drawn in its showcase card.
+export const architecture = [
+  { k: 'Vercel', v: 'Next.js' },
+  { link: 'REST · WSS' },
+  { k: 'AWS EC2', v: 'Express · Socket.IO' },
+  { link: 'Prisma' },
+  { k: 'Neon', v: 'PostgreSQL' },
+]
+
+// Illustrative output for the Wardrobe AI showcase card.
+export const sampleScore = [
+  { k: 'Formality', v: 90 },
+  { k: 'Coordination', v: 84 },
+  { k: 'Weather', v: 78 },
+  { k: 'Event', v: 92 },
 ]
 
 export const skills = [
-  { group: 'Languages', items: ['Python', 'C++', 'JavaScript', 'SQL', 'HTML', 'CSS'] },
-  { group: 'Frameworks', items: ['React.js', 'Node.js', 'Express.js', 'Flask', 'FastAPI'] },
-  { group: 'Databases', items: ['MongoDB', 'MySQL', 'PostgreSQL'] },
-  { group: 'Cloud & DevOps', items: ['AWS', 'Google Cloud Platform', 'Docker', 'Git', 'GitHub'] },
+  { group: 'Languages', items: ['Python', 'C++', 'JavaScript', 'TypeScript', 'SQL', 'HTML', 'CSS'] },
+  { group: 'Frameworks', items: ['React.js', 'Next.js', 'Node.js', 'Express.js', 'Flask', 'FastAPI'] },
+  { group: 'Databases', items: ['PostgreSQL', 'MongoDB', 'MySQL', 'SQLite'] },
+  { group: 'Cloud & DevOps', items: ['AWS (EC2)', 'Docker', 'Git', 'GitHub', 'Vercel', 'Neon'] },
 ]
 
 export const certifications = [
-  { title: 'AWS Certified Solutions Architect', code: 'Associate · SAA-C03', org: 'Amazon Web Services', featured: true },
-  { title: 'AWS Certified Cloud Practitioner', code: 'CLF-C02', org: 'Amazon Web Services', featured: true },
-  { title: 'Azure Data Fundamentals', code: 'DP-900', org: 'Microsoft' },
-  { title: 'Introduction to Internet of Things', code: 'Certificate', org: 'NPTEL' },
+  {
+    title: 'Azure Data Fundamentals',
+    code: 'Certificate',
+    org: 'Microsoft',
+    featured: true,
+    url: 'https://drive.google.com/file/d/1n_VJK0f1HFrd7Pb-EATlcwKXn8cu22bw/view',
+  },
+  {
+    title: 'Introduction to Internet of Things',
+    code: 'Certificate',
+    org: 'NPTEL',
+    url: 'https://drive.google.com/file/d/1xWlhc9JkfJ3mHS3FHNwbatpm0Kks8Ezz/view',
+  },
 ]
 
 export const achievements = [
-  { title: '5-Star rating in C++', place: 'HackerRank', note: 'Data structures, algorithms & problem solving' },
-  { title: '300+ problems solved', place: 'LeetCode & others', note: 'Consistent competitive programming practice' },
-  { title: 'Ranked under 500,000', place: 'LeetCode global', note: 'Across all rated users' },
+  { title: '5-Star rating in C++', place: 'HackerRank', note: 'C++ programming, data structures, algorithms & problem solving' },
+  { title: '300+ problems solved', place: 'LeetCode & others', note: 'Data structures and algorithms across coding platforms' },
+  { title: 'Ranked under 500,000', place: 'LeetCode global', note: 'LeetCode ranking across all users' },
 ]
 
 export const education = [
   {
     school: 'VIT Bhopal University',
     detail: 'B.Tech, Computer Science & Engineering — Cloud Computing and Automation',
-    place: 'Bhopal, Madhya Pradesh',
+    place: 'Bhopal, Madhya Pradesh · May 2027',
     score: 'CGPA 8.00 / 10',
   },
   {
-    school: 'Bhavans Kesari Devi Kanoria Vidya Mandir',
-    detail: 'Class X — 92.5%   ·   Class XII — 73.5%',
+    school: 'Bhavan’s Kesari Devi Kanoria Vidya Mandir',
+    detail: 'Class X — 92.5% (2021)   ·   Class XII — 73.5% (2023)',
     place: 'Sonebhadra, Uttar Pradesh',
     score: null,
   },

@@ -1,5 +1,6 @@
 import { projects } from '../data'
 import Reveal from './Reveal'
+import ProjectVisual from './ProjectVisual'
 
 /**
  * Each project is a sticky showcase: the summary card pins to the viewport
@@ -19,6 +20,8 @@ function Showcase({ p }) {
           <h3 className="pin-name display">{p.name}</h3>
           <p className="pin-tagline">{p.tagline}</p>
 
+          <ProjectVisual kind={p.visual} />
+
           <div className="pin-metrics">
             {p.metrics.map((m) => (
               <div className="pm" key={m.v}>
@@ -31,7 +34,13 @@ function Showcase({ p }) {
           <div className="pin-stack">
             {p.stack.map((s) => <span className="chip" key={s}>{s}</span>)}
           </div>
+          <div className="pin-foot">
             <span className="pin-period mono">{p.period}</span>
+            <span className="pin-links mono">
+              <a href={p.links.live} target="_blank" rel="noreferrer">Live <i>↗</i></a>
+              <a href={p.links.code} target="_blank" rel="noreferrer">Code <i>↗</i></a>
+            </span>
+          </div>
           </Reveal>
         </div>
       </div>
@@ -59,8 +68,9 @@ export default function Work() {
         </Reveal>
         <Reveal delay={0.1}>
           <p className="lead">
-            From schema design and authorization to real-time features and cloud deployment —
-            these are the projects I would want to talk through in an interview.
+            From schema design and authorization to real-time features, LLM integration and
+            cloud deployment — both are live, and both are projects I would want to talk
+            through in an interview.
           </p>
         </Reveal>
 
