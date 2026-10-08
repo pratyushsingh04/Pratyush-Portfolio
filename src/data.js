@@ -12,7 +12,7 @@ export const profile = {
   status: 'Open to SDE & Cloud roles',
   headline: ['Full-stack products,', 'shipped to the cloud.'],
   summary:
-    'Computer Science Engineering student specializing in Cloud Computing and Automation, with hands-on experience in cloud platforms, containerization and deploying production web applications on the cloud. I build and deploy secure, multi-tenant cloud applications with authentication, role-based access control and real-time services.',
+    'Computer Science Engineering student (B.Tech, 2027) specializing in Cloud Computing and Automation, with a focus on backend and cloud engineering. I work across the stack with TypeScript, Node.js, React and PostgreSQL, and deploy applications on AWS, Vercel and Neon.',
   links: {
     github: 'https://github.com/pratyushsingh04',
     linkedin: 'https://www.linkedin.com/in/pratyush-singh-28411328a/',
@@ -57,7 +57,7 @@ export const projects = [
     points: [
       {
         h: '85+ endpoints on a 23-model schema',
-        p: 'Built and deployed a multi-tenant cloud SaaS workspace unifying HR, project delivery and a client portal for service companies, exposing 85+ REST API endpoints across 18 Express modules on a 23-model PostgreSQL schema via Prisma.',
+        p: 'Architected and deployed a multi-tenant cloud SaaS workspace unifying HR, project delivery and a client portal for service companies, exposing 85+ REST API endpoints across 18 Express modules on a 23-model PostgreSQL schema via Prisma.',
       },
       {
         h: 'Four roles, every tenant isolated',
@@ -69,11 +69,15 @@ export const projects = [
       },
       {
         h: 'Real-time over authenticated WebSockets',
-        p: 'Built a real-time layer with Socket.IO over cookie-authenticated WebSockets and isolated per-project rooms, live-syncing a drag-and-drop Kanban board, activity feeds, attendance and notifications.',
+        p: 'Orchestrated a real-time layer with Socket.IO over cookie-authenticated WebSockets and 4 isolated room scopes (company, project, client, user), live-syncing a Kanban board, activity feeds, attendance and notifications.',
       },
       {
         h: 'Geofencing, an AI assistant, and AWS',
-        p: 'Developed geofenced attendance (Haversine distance), leave-approval workflows and an AI assistant using LLM tool calling (Gemini/Groq). The Node.js/Express backend runs on AWS EC2, with a Vercel frontend and Neon serverless PostgreSQL.',
+        p: 'Integrated geofenced attendance (Haversine distance), approval workflows for 4 leave types and an AI assistant using LLM tool calling (Gemini/Groq). The Node.js/Express backend is deployed on AWS EC2, with Vercel and Neon PostgreSQL.',
+      },
+      {
+        h: 'One command to run it locally',
+        p: 'Documented architecture, setup and deployment in a detailed README, enabling one-command local setup with an embedded PostgreSQL database and no Docker dependency.',
       },
     ],
     metrics: [
@@ -104,11 +108,11 @@ export const projects = [
       },
       {
         h: 'One AI layer, two providers',
-        p: 'Engineered a provider-agnostic cloud AI layer integrating Google Gemini and Anthropic Claude APIs with Zod-validated structured JSON output, ensuring type-safe responses and consistent error handling across both providers.',
+        p: 'Engineered a provider-agnostic cloud AI layer integrating 2 LLM providers (Google Gemini and Anthropic Claude) with Zod-validated structured JSON output, ensuring type-safe responses and consistent error handling.',
       },
       {
         h: 'A closet that tags itself',
-        p: 'Built a digital closet with automatic AI tagging of category, color, fabric, season and occasion, plus outfit recommendations with a rule-based fallback that keeps suggestions working when the AI is unavailable.',
+        p: 'Created a digital closet with automatic AI tagging across 8 clothing categories, 4 seasons and 7 occasions, plus outfit recommendations with a rule-based fallback that keeps suggestions working when the AI is unavailable.',
       },
       {
         h: 'Five routes, live weather, lean uploads',
@@ -166,9 +170,9 @@ export const certifications = [
 ]
 
 export const achievements = [
-  { title: '5-Star rating in C++', place: 'HackerRank', note: 'C++ programming, data structures, algorithms & problem solving' },
-  { title: '300+ problems solved', place: 'LeetCode & others', note: 'Data structures and algorithms across coding platforms' },
-  { title: 'Ranked under 500,000', place: 'LeetCode global', note: 'LeetCode ranking across all users' },
+  { title: '5-Star rating in C++', place: 'HackerRank', note: 'Earned by solving challenges across data structures and algorithms' },
+  { title: '300+ problems solved', place: 'LeetCode & others', note: 'Coding problems across LeetCode and other platforms' },
+  { title: 'Ranked under 500,000', place: 'LeetCode global', note: 'Global LeetCode ranking' },
 ]
 
 export const education = [

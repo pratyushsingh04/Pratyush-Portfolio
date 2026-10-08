@@ -4,6 +4,7 @@ import './App.css'
 
 import Loader from './components/Loader'
 import Cursor from './components/Cursor'
+import CommandPalette from './components/CommandPalette'
 import ScrollBand from './components/ScrollBand'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
@@ -24,6 +25,7 @@ export default function App() {
       {booted && (
         <>
           <Nav />
+          <CommandPalette />
           <main>
             <Hero />
             <About />

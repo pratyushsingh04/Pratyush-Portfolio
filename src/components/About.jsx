@@ -28,9 +28,10 @@ export default function About() {
           <Reveal delay={0.1} className="about-copy">
             <p className="lead">{profile.summary}</p>
             <p className="about-note">
-              Proficient in <strong>AWS, Docker, Git and GitHub</strong>, with a strong backend
-              foundation in <strong>Node.js, REST APIs and PostgreSQL</strong>. Graduating from
-              VIT Bhopal in May 2027 — and solving DSA problems in between deploys.
+              Skilled in <strong>REST API design, JWT authentication and role-based access
+              control</strong>, <strong>real-time WebSocket services</strong> and <strong>LLM
+              integration</strong>. Microsoft Azure Data Fundamentals certified, with 300+ DSA
+              problems completed on LeetCode.
             </p>
           </Reveal>
 

@@ -4,10 +4,12 @@ import { consoleLines } from '../data'
 
 const CHAR_MS = 42
 const LINE_MS = 340
+const REPLAY_MS = 7000
 
 /**
  * A terminal that types out the WorkNest deployment. Commands are typed
- * character by character; output lines land whole, one beat apart.
+ * character by character; output lines land whole, one beat apart. It
+ * replays after a pause.
  */
 export default function DeployConsole({ delay = 1400 }) {
   const reduced = useReducedMotion()
@@ -15,7 +17,11 @@ export default function DeployConsole({ delay = 1400 }) {
   const [chars, setChars] = useState(0)
 
   useEffect(() => {
-    if (reduced || line >= consoleLines.length) return
+    if (reduced) return
+    if (line >= consoleLines.length) {
+      const id = setTimeout(() => { setLine(0); setChars(0) }, REPLAY_MS)
+      return () => clearTimeout(id)
+    }
     const cur = consoleLines[line]
     const typing = cur.t === 'cmd' && chars < cur.text.length
     const wait = line === 0 && chars === 0 ? delay : typing ? CHAR_MS : LINE_MS

@@ -59,6 +59,7 @@ export default function Contact() {
           </button>
         </footer>
       </div>
+      <div className="wordmark display" aria-hidden="true">{profile.name}</div>
     </section>
   )
 }

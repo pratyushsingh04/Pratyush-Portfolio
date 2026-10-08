@@ -58,6 +58,10 @@ export default function Nav() {
           ))}
         </nav>
 
+        <button className="nav-k mono" onClick={() => window.dispatchEvent(new Event('palette:open'))} aria-label="Open command palette">
+          <span>Search</span><kbd>Ctrl K</kbd>
+        </button>
+
         <a className="nav-cta" href={profile.resume} download>
           Résumé <span className="nav-cta-i">↓</span>
         </a>
