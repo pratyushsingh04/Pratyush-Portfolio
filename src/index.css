@@ -2,12 +2,11 @@
    POP — loud colour blocks, thick ink outlines, hard shadows
    ============================================================ */
 :root {
-  --bg: #fff4dc;
+  --bg: #ffffff;
   --card: #ffffff;
   --ink: #14121a;
   --muted: #5b5563;
   --faint: #8a8492;
-  --dot: rgba(20, 18, 26, 0.13);
 
   --yellow: #ffd23f;
   --pink: #ff5c8a;
@@ -35,12 +34,11 @@
   --maxw: 1200px;
 }
 :root[data-theme='dark'] {
-  --bg: #14121a;
-  --card: #221e2c;
-  --ink: #fff4dc;
+  --bg: #0f0e13;
+  --card: #1c1a23;
+  --ink: #f6f3ee;
   --muted: #c2bacb;
   --faint: #8e8799;
-  --dot: rgba(255, 244, 220, 0.09);
   --pop: var(--yellow);
 }
 
@@ -54,8 +52,6 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
   font-family: var(--font-body);
   background-color: var(--bg);
-  background-image: radial-gradient(var(--dot) 1.5px, transparent 1.6px);
-  background-size: 26px 26px;
   color: var(--ink);
   line-height: 1.6;
   font-size: 16px;

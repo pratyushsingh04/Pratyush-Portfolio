@@ -58,8 +58,8 @@
    ============================================================ */
 .loader {
   position: fixed; inset: 0; z-index: 1000;
-  background: var(--yellow);
-  color: var(--dark);
+  background: var(--bg);
+  color: var(--ink);
   display: flex; flex-direction: column; justify-content: center;
   padding: clamp(24px, 5vw, 56px);
   overflow: hidden;
@@ -73,14 +73,14 @@
   margin-left: calc(min(46vw, 420px) / -2);
   border-radius: 50%;
   background: var(--pink);
-  border: 4px solid var(--dark);
+  border: 4px solid var(--ink);
 }
-.loader-horizon { position: absolute; left: 0; right: 0; bottom: 0; height: 22%; background: var(--yellow); border-top: 4px solid var(--dark); }
+.loader-horizon { position: absolute; left: 0; right: 0; bottom: 0; height: 22%; background: var(--bg); border-top: 4px solid var(--ink); }
 .loader-mid { position: relative; z-index: 2; text-align: center; }
 .loader-name { font-size: clamp(2.4rem, 9vw, 6rem); }
-.loader-role { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 16px; padding: 6px 12px; background: var(--dark); color: var(--yellow); border-radius: 8px; transform: rotate(-2deg); }
+.loader-role { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 16px; padding: 6px 12px; background: var(--ink); color: var(--bg); border-radius: 8px; transform: rotate(-2deg); }
 .loader-foot { position: absolute; z-index: 2; left: clamp(24px, 5vw, 56px); right: clamp(24px, 5vw, 56px); bottom: clamp(24px, 5vw, 44px); display: flex; align-items: center; gap: 18px; }
-.loader-bar { flex: 1; height: 16px; background: #fff; border: 3px solid var(--dark); border-radius: 999px; overflow: hidden; }
+.loader-bar { flex: 1; height: 16px; background: var(--card); border: 3px solid var(--ink); border-radius: 999px; overflow: hidden; }
 .loader-bar span { display: block; height: 100%; background: var(--blue); transform-origin: left; transition: transform 0.14s linear; }
 .loader-pct { font-size: 0.95rem; font-weight: 700; }
 
@@ -166,19 +166,6 @@
 .hero { position: relative; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding: 140px 0 0; }
 .hero-in, .hero-marquee { position: relative; z-index: 1; }
 
-.shapes { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-.shape { position: absolute; }
-.shape path, .shape circle, .shape rect { stroke: var(--ink); stroke-width: 5; stroke-linejoin: round; }
-.s-star { width: 92px; top: 15%; right: 7%; animation: spin 14s linear infinite; }
-.s-star path { fill: var(--yellow); }
-.s-dot { width: 46px; top: 60%; left: max(6px, calc((100% - 1200px) / 2 - 64px)); animation: floaty 6s ease-in-out infinite; }
-.s-dot circle { fill: var(--pink); }
-.s-pill { width: 110px; bottom: 19%; right: 3%; animation: floaty 7s ease-in-out -2s infinite; }
-.s-pill rect { fill: var(--mint); }
-.s-zig { width: 130px; top: 12%; left: 44%; animation: wiggle 5s ease-in-out infinite; }
-.s-zig path { fill: none; stroke: var(--blue); stroke-width: 9; stroke-linecap: round; }
-.s-plus { width: 46px; top: 27%; right: 19%; animation: spin 9s linear infinite reverse; }
-.s-plus path { fill: var(--purple); }
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes floaty { 0%, 100% { transform: translateY(0) rotate(-8deg); } 50% { transform: translateY(-22px) rotate(8deg); } }
 @keyframes wiggle { 0%, 100% { transform: rotate(-6deg) translateX(0); } 50% { transform: rotate(5deg) translateX(14px); } }
@@ -502,7 +489,6 @@
   .about-grid { grid-template-columns: 1fr; }
   .hero-row { grid-template-columns: 1fr; }
   .hero-console { max-width: 560px; margin-top: 30px; }
-  .s-zig, .s-plus, .s-dot { display: none; }
 }
 @media (max-width: 900px), (max-height: 760px) {
   .pin-sticky { position: relative; top: 0; }
@@ -527,8 +513,6 @@
   .showcase-body { padding-left: 24px; }
   .hero-marquee { font-size: 1rem; }
   .spin-badge { width: 88px; height: 88px; top: -44px; right: -6px; }
-  .s-star { width: 58px; top: 11%; right: 4%; }
-  .s-pill { display: none; }
   .contact-halo { width: 150px; height: 150px; top: -60px; right: -50px; }
   .contact-card::after { width: 110px; height: 110px; }
   .nav-role { display: none; }
