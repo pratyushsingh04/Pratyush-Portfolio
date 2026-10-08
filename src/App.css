@@ -943,3 +943,50 @@
 .loader-count i { font-size: 0.32em; letter-spacing: 0; margin-left: 6px; vertical-align: top; }
 .ln-wave.front { fill: #fff; }
 @media (max-width: 620px) { .loader-steps { margin-top: 26px; } .loader-name { width: 94vw; } }
+
+/* ============================================================
+   Loader v4 — an editor that types the portfolio into existence
+   ============================================================ */
+.ide {
+  position: relative;
+  width: min(92vw, 660px);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(9, 9, 11, 0.92);
+  box-shadow: 0 50px 120px -30px #000, 0 0 110px -40px rgba(165, 180, 252, 0.5);
+  overflow: hidden;
+}
+.ide-bar { display: flex; align-items: center; gap: 14px; height: 42px; padding: 0 14px; border-bottom: 1px solid var(--line-2); }
+.ide-dots { display: inline-flex; gap: 6px; }
+.ide-dots i { width: 10px; height: 10px; border-radius: 50%; background: #2c2c2e; }
+.ide-tab { display: inline-flex; align-items: center; gap: 8px; height: 100%; padding: 0 12px; font-size: 0.72rem; color: var(--text); border-bottom: 1px solid var(--accent); margin-bottom: -1px; }
+.ide-tab b { font-size: 0.56rem; font-weight: 500; padding: 2px 4px; border-radius: 3px; background: rgba(165, 180, 252, 0.16); color: var(--accent-2); }
+.ide-lang { margin-left: auto; font-size: 0.64rem; color: var(--faint); }
+
+.ide-code { padding: 16px 0 14px; font-size: clamp(0.7rem, 1.5vw, 0.86rem); line-height: 1.85; }
+.ide-line { display: flex; min-height: 1.85em; padding-right: 16px; }
+.ide-line.on { background: rgba(255, 255, 255, 0.035); }
+.ide-n { flex: 0 0 46px; padding-right: 16px; text-align: right; color: #3f3f46; user-select: none; }
+.ide-line.on .ide-n { color: var(--muted); }
+.ide-t { white-space: pre; overflow: hidden; }
+.tk-c { color: #5b5b63; font-style: italic; }
+.tk-k { color: #a5b4fc; }
+.tk-n { color: #e4e4e7; }
+.tk-pr { color: #93c5fd; }
+.tk-s { color: #86efac; }
+.tk-b { color: #fdba74; }
+.tk-f { color: #f0abfc; }
+.tk-p { color: #8b8b93; }
+.ide-caret { display: inline-block; width: 2px; height: 1.15em; margin-left: 1px; background: #fff; vertical-align: text-bottom; animation: caret 0.9s steps(1) infinite; }
+
+.ide-term { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-top: 1px solid var(--line-2); background: #050506; font-size: clamp(0.62rem, 1.3vw, 0.74rem); white-space: nowrap; overflow: hidden; }
+.ide-prompt { color: var(--accent); }
+.ide-cmd { color: var(--text); }
+.ide-meter { flex: 1; min-width: 0; overflow: hidden; text-align: right; color: #2f2f35; letter-spacing: -0.06em; }
+.ide-meter b { font-weight: 400; color: #fff; text-shadow: 0 0 12px rgba(165, 180, 252, 0.8); }
+.ide-pct { flex: 0 0 52px; text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
+.ide-pct.ok { color: #86efac; }
+@media (max-width: 620px) {
+  .ide-n { flex-basis: 34px; padding-right: 10px; }
+  .ide-lang { display: none; }
+}

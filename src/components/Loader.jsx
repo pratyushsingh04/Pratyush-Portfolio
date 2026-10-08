@@ -2,17 +2,28 @@ import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { profile } from '../data'
 
-const STAGES = ['Provisioning', 'Building', 'Deploying', 'Live']
 const ease = [0.76, 0, 0.24, 1]
+const BAR = 22
 
-// One wave crest every 250 units, long enough to slide a full period sideways.
-const WAVE = `M0 0 ${'q62.5 -22 125 0 t125 0 '.repeat(6)}V320 H0 Z`
-const text = { x: 500, y: 158, textAnchor: 'middle', textLength: 960, lengthAdjust: 'spacingAndGlyphs' }
+// The file the loader "writes": lines of [token class, text] pairs.
+const CODE = [
+  [['c', '// portfolio.ts']],
+  [['k', 'const'], ['n', ' engineer'], ['p', ' = {']],
+  [['pr', '  name'], ['p', ': '], ['s', `"${profile.name}"`], ['p', ',']],
+  [['pr', '  role'], ['p', ': '], ['s', `"${profile.role}"`], ['p', ',']],
+  [['pr', '  stack'], ['p', ': ['], ['s', '"Next.js"'], ['p', ', '], ['s', '"Node.js"'], ['p', ', '], ['s', '"AWS"'], ['p', '],']],
+  [['pr', '  openToWork'], ['p', ': '], ['b', 'true'], ['p', ',']],
+  [['p', '};']],
+  [],
+  [['k', 'await'], ['f', ' deploy'], ['p', '('], ['n', 'engineer'], ['p', ');']],
+]
+const lineLength = (line) => line.reduce((n, [, t]) => n + t.length, 0)
+const TOTAL = CODE.reduce((n, line) => n + lineLength(line) + 1, 0)
 
 /**
- * Boot screen: the name stands in outline and fills with liquid — two waves
- * rising inside the letters — as the deploy stages tick over. When it is
- * full, the name lifts away and the screen parts, one half up, one half down.
+ * Boot screen: an editor types out a small TypeScript file describing the
+ * engineer while a terminal bar runs the deploy. When it reaches 100% the
+ * editor lifts away and the screen parts, one half up, one half down.
  */
 export default function Loader({ onDone }) {
   const [visible, setVisible] = useState(true)
@@ -23,15 +34,15 @@ export default function Loader({ onDone }) {
     if (reduced) return finish()
     const iv = setInterval(() => {
       setPct((p) => {
-        const n = p + Math.random() * 5 + 2.5
+        const n = p + Math.random() * 3.4 + 1.6
         if (n >= 100) {
           clearInterval(iv)
-          setTimeout(finish, 520)
+          setTimeout(finish, 650)
           return 100
         }
         return n
       })
-    }, 90)
+    }, 60)
     return () => clearInterval(iv)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -41,9 +52,23 @@ export default function Loader({ onDone }) {
     setTimeout(() => onDone?.(), 380)
   }
 
-  const step = pct >= 100 ? 3 : Math.floor(pct / 34)
-  // Liquid surface: below the baseline at 0, above the cap height at 100.
-  const level = 196 - pct * 1.9
+  // How many characters of the file are typed so far, and on which line the caret sits.
+  let left = Math.floor((pct / 100) * TOTAL)
+  let caretLine = 0
+  const typed = CODE.map((line, i) => {
+    const budget = left
+    left -= lineLength(line) + 1
+    if (budget <= 0) return null
+    caretLine = i
+    let room = budget
+    return line.map(([cls, t]) => {
+      const part = t.slice(0, Math.max(room, 0))
+      room -= t.length
+      return [cls, part]
+    })
+  })
+  const done = pct >= 100
+  const filled = Math.round((pct / 100) * BAR)
 
   return (
     <AnimatePresence>
@@ -52,43 +77,49 @@ export default function Loader({ onDone }) {
           <motion.span className="loader-panel top" exit={{ y: '-100%', transition: { duration: 0.95, delay: 0.32, ease } }} />
           <motion.span className="loader-panel bottom" exit={{ y: '100%', transition: { duration: 0.95, delay: 0.32, ease } }} />
 
-          <motion.div className="loader-inner" exit={{ opacity: 0, scale: 1.25, filter: 'blur(14px)', transition: { duration: 0.45, ease: 'easeIn' } }}>
+          <motion.div className="loader-inner" exit={{ opacity: 0, scale: 1.12, filter: 'blur(12px)', transition: { duration: 0.45, ease: 'easeIn' } }}>
             <span className="loader-grid" aria-hidden="true" />
             <div className="loader-top mono">
-              <span>{profile.role}</span>
+              <span>{profile.name}</span>
               <span>{profile.location}</span>
             </div>
 
-            <motion.svg
-              className="loader-name"
-              viewBox="0 0 1000 200"
+            <motion.div
+              className="ide"
               role="img"
-              aria-label={profile.name}
-              initial={{ opacity: 0, y: 30, scale: 0.96 }}
+              aria-label={`Loading ${profile.name}'s portfolio`}
+              initial={{ opacity: 0, y: 26, scale: 0.96 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
-              <defs>
-                <clipPath id="loader-name-clip"><text {...text}>{profile.name}</text></clipPath>
-              </defs>
-              <text className="ln-outline" {...text}>{profile.name}</text>
-              <g clipPath="url(#loader-name-clip)">
-                <g className="ln-level" style={{ transform: `translateY(${level}px)` }}>
-                  <path className="ln-wave back" d={WAVE} />
-                  <path className="ln-wave front" d={WAVE} />
-                </g>
-              </g>
-            </motion.svg>
+              <div className="ide-bar" aria-hidden="true">
+                <span className="ide-dots"><i /><i /><i /></span>
+                <span className="ide-tab mono"><b>TS</b>portfolio.ts</span>
+                <span className="ide-lang mono">TypeScript</span>
+              </div>
 
-            <div className="loader-steps mono" aria-hidden="true">
-              {STAGES.map((s, i) => (
-                <span key={s} className={i < step ? 'done' : i === step ? 'now' : ''}><i />{s}</span>
-              ))}
-            </div>
+              <div className="ide-code mono" aria-hidden="true">
+                {CODE.map((_, i) => (
+                  <div className={`ide-line ${i === caretLine ? 'on' : ''}`} key={i}>
+                    <span className="ide-n">{typed[i] ? i + 1 : ''}</span>
+                    <span className="ide-t">
+                      {typed[i]?.map(([cls, t], j) => <span className={`tk-${cls}`} key={j}>{t}</span>)}
+                      {i === caretLine && <i className="ide-caret" />}
+                    </span>
+                  </div>
+                ))}
+              </div>
 
-            <span className="loader-count display" aria-label={`Loading ${Math.floor(pct)} percent`}>
-              {String(Math.floor(pct)).padStart(2, '0')}<i>%</i>
-            </span>
+              <div className="ide-term mono" aria-hidden="true">
+                <span className="ide-prompt">$</span>
+                <span className="ide-cmd">deploy --prod</span>
+                <span className="ide-meter">
+                  <b>{'█'.repeat(filled)}</b>{'░'.repeat(BAR - filled)}
+                </span>
+                <span className={`ide-pct ${done ? 'ok' : ''}`}>{done ? '✓ live' : `${String(Math.floor(pct)).padStart(2, '0')}%`}</span>
+              </div>
+            </motion.div>
+
             <div className="loader-line"><span style={{ transform: `scaleX(${pct / 100})` }} /></div>
           </motion.div>
         </motion.div>
