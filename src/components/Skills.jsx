@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { skills } from '../data'
 import Reveal, { parent, item } from './Reveal'
+import Heading from './Heading'
 import SpotlightCard from './SpotlightCard'
 
 export default function Skills() {
@@ -8,9 +9,7 @@ export default function Skills() {
     <section id="skills" className="section skills">
       <div className="container">
         <Reveal><span className="eyebrow">03 — Toolkit</span></Reveal>
-        <Reveal delay={0.05}>
-          <h2 className="h2">What I build <span className="serif grad">with.</span></h2>
-        </Reveal>
+        <Heading lines={[[{ t: 'What I build' }, { t: 'with.', grad: true }]]} />
 
         <div className="skills-grid">
           {skills.map((g, i) => (

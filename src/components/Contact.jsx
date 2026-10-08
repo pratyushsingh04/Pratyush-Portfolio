@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { profile } from '../data'
 import Reveal from './Reveal'
+import Heading from './Heading'
 import Magnetic from './Magnetic'
 
 export default function Contact() {
@@ -21,11 +22,7 @@ export default function Contact() {
         <div className="contact-card">
           <span className="contact-halo" aria-hidden="true" />
           <Reveal><span className="eyebrow">05 — Contact</span></Reveal>
-          <Reveal delay={0.05}>
-            <h2 className="contact-h display">
-              Let's build something<br /><span className="serif grad">worth shipping.</span>
-            </h2>
-          </Reveal>
+          <Heading className="contact-h display" lines={[[{ t: "Let's build something" }], [{ t: 'worth shipping.', grad: true }]]} />
           <Reveal delay={0.1}>
             <p className="contact-lead">
               I'm looking for SDE and cloud engineering roles. If you're hiring — or just want

@@ -1,6 +1,7 @@
 import { profile, stats, education } from '../data'
 import { useCountUp, useInView } from '../hooks'
 import Reveal from './Reveal'
+import Heading from './Heading'
 import SpotlightCard from './SpotlightCard'
 
 function Stat({ s, start }) {
@@ -20,11 +21,7 @@ export default function About() {
     <section id="about" className="section about">
       <div className="container">
         <Reveal><span className="eyebrow">01 — About</span></Reveal>
-        <Reveal delay={0.05}>
-          <h2 className="h2">
-            I like problems that live<br />between the <span className="serif grad">app and the cloud.</span>
-          </h2>
-        </Reveal>
+        <Heading lines={[[{ t: 'I like problems that live' }], [{ t: 'between the' }, { t: 'app and the cloud.', grad: true }]]} />
 
         <div className="about-grid" ref={ref}>
           <Reveal delay={0.1} className="about-copy">

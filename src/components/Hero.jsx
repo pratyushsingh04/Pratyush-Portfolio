@@ -2,6 +2,8 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { profile, marquee } from '../data'
 import Magnetic from './Magnetic'
 import DeployConsole from './DeployConsole'
+import Constellation from './Constellation'
+import Tilt from './Tilt'
 
 const line = {
   hidden: { y: '110%' },
@@ -17,6 +19,7 @@ export default function Hero() {
 
   return (
     <section id="home" className="hero">
+      <Constellation />
       <motion.div className="container hero-in" style={{ y, opacity }}>
         <motion.div className="hero-badge" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}>
           <span className="hero-ping" />
@@ -66,7 +69,7 @@ export default function Hero() {
         </div>
 
         <motion.div className="hero-console" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}>
-          <DeployConsole />
+          <Tilt><DeployConsole /></Tilt>
         </motion.div>
         </div>
       </motion.div>

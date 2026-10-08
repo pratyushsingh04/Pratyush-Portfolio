@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { MotionConfig } from 'framer-motion'
 import './App.css'
 
 import GlowCursor from './components/GlowCursor'
@@ -15,7 +16,7 @@ export default function App() {
   const [booted, setBooted] = useState(false)
 
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       <div className="aurora" aria-hidden="true">
         <span className="blob blob-1" />
         <span className="blob blob-2" />
@@ -40,6 +41,6 @@ export default function App() {
           </main>
         </>
       )}
-    </>
+    </MotionConfig>
   )
 }

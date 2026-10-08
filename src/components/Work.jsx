@@ -1,5 +1,10 @@
+import { useRef } from 'react'
+import { motion, useScroll, useSpring } from 'framer-motion'
 import { projects } from '../data'
+import { useCountUp, useInView } from '../hooks'
 import Reveal from './Reveal'
+import Heading from './Heading'
+import Tilt from './Tilt'
 import ProjectVisual from './ProjectVisual'
 
 /**
@@ -7,11 +12,28 @@ import ProjectVisual from './ProjectVisual'
  * while its detailed points scroll past it, so the reader always knows which
  * project they are inside.
  */
+function Metric({ m }) {
+  const num = /^(\d+)(\+?)$/.exec(m.k)
+  const [ref, inView] = useInView({ threshold: 0.6 })
+  const n = useCountUp(num ? Number(num[1]) : 0, { start: inView, duration: 1400 })
+  return (
+    <div className="pm" ref={ref}>
+      <span className="pm-k display grad">{num ? `${n}${num[2]}` : m.k}</span>
+      <span className="pm-v mono">{m.v}</span>
+    </div>
+  )
+}
+
 function Showcase({ p }) {
+  const body = useRef(null)
+  const { scrollYProgress } = useScroll({ target: body, offset: ['start 75%', 'end 55%'] })
+  const fill = useSpring(scrollYProgress, { stiffness: 140, damping: 30, mass: 0.3 })
+
   return (
     <div className={`showcase accent-${p.accent}`}>
       <div className="showcase-pin">
         <div className="pin-sticky">
+          <Tilt max={5}>
           <Reveal className="pin-card">
           <div className="pin-top">
             <span className="pin-index display">{p.index}</span>
@@ -23,12 +45,7 @@ function Showcase({ p }) {
           <ProjectVisual kind={p.visual} />
 
           <div className="pin-metrics">
-            {p.metrics.map((m) => (
-              <div className="pm" key={m.v}>
-                <span className="pm-k display grad">{m.k}</span>
-                <span className="pm-v mono">{m.v}</span>
-              </div>
-            ))}
+            {p.metrics.map((m) => <Metric key={m.v} m={m} />)}
           </div>
 
           <div className="pin-stack">
@@ -42,10 +59,12 @@ function Showcase({ p }) {
             </span>
           </div>
           </Reveal>
+          </Tilt>
         </div>
       </div>
 
-      <div className="showcase-body">
+      <div className="showcase-body" ref={body}>
+        <span className="rail" aria-hidden="true"><motion.span className="rail-fill" style={{ scaleY: fill }} /></span>
         {p.points.map((pt, i) => (
           <Reveal className="point" key={i} delay={0.04}>
             <span className="point-n mono">{String(i + 1).padStart(2, '0')}</span>
@@ -63,9 +82,7 @@ export default function Work() {
     <section id="work" className="section work">
       <div className="container">
         <Reveal><span className="eyebrow">02 — Selected work</span></Reveal>
-        <Reveal delay={0.05}>
-          <h2 className="h2">Two systems, built<br />end to <span className="serif grad">end.</span></h2>
-        </Reveal>
+        <Heading lines={[[{ t: 'Two systems, built' }], [{ t: 'end to' }, { t: 'end.', grad: true }]]} />
         <Reveal delay={0.1}>
           <p className="lead">
             From schema design and authorization to real-time features, LLM integration and

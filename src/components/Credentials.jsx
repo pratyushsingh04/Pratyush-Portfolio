@@ -1,5 +1,6 @@
 import { certifications, achievements } from '../data'
 import Reveal from './Reveal'
+import Heading from './Heading'
 import SpotlightCard from './SpotlightCard'
 
 export default function Credentials() {
@@ -7,9 +8,7 @@ export default function Credentials() {
     <section id="credentials" className="section creds">
       <div className="container">
         <Reveal><span className="eyebrow">04 — Credentials</span></Reveal>
-        <Reveal delay={0.05}>
-          <h2 className="h2">Certified, and <span className="serif grad">practised.</span></h2>
-        </Reveal>
+        <Heading lines={[[{ t: 'Certified, and' }, { t: 'practised.', grad: true }]]} />
 
         <div className="cert-grid">
           {certifications.map((c, i) => (
