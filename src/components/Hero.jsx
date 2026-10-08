@@ -2,14 +2,12 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { profile } from '../data'
 import Magnetic from './Magnetic'
 import DeployConsole from './DeployConsole'
-import Tilt from './Tilt'
-import Starfield from './Starfield'
 import Globe from './Globe'
 
-const title = { hidden: {}, show: { transition: { staggerChildren: 0.03, delayChildren: 0.25 } } }
+const title = { hidden: {}, show: { transition: { staggerChildren: 0.022, delayChildren: 0.2 } } }
 const char = {
-  hidden: { y: '0.5em', opacity: 0, filter: 'blur(14px)', rotateX: -80 },
-  show: { y: 0, opacity: 1, filter: 'blur(0px)', rotateX: 0, transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] } },
+  hidden: { y: '0.35em', opacity: 0, filter: 'blur(8px)' },
+  show: { y: 0, opacity: 1, filter: 'blur(0px)', transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] } },
 }
 
 // Split into words (kept unbreakable) of individually animated characters.
@@ -21,8 +19,6 @@ const chars = (text) =>
     ' ',
   ])
 
-const tags = ['AWS EC2', 'Vercel', 'Neon · Postgres', 'Socket.IO']
-
 export default function Hero() {
   const { scrollYProgress } = useScroll()
   const y = useTransform(scrollYProgress, [0, 0.16], [0, -60])
@@ -32,9 +28,6 @@ export default function Hero() {
 
   return (
     <section id="home" className="hero">
-      <Starfield />
-      <div className="hero-beams" aria-hidden="true"><i /><i /><i /><i /><i /></div>
-
       <motion.div className="container hero-in" style={{ y, opacity }}>
         <div className="hero-grid">
           <div className="hero-left">
@@ -49,7 +42,7 @@ export default function Hero() {
               <span className="hero-line" aria-hidden="true">{chars(profile.headline[0])}</span>
               <span className="hero-line" aria-hidden="true">
                 {chars('shipped to the')}{' '}
-                <motion.span className="hero-word grad" variants={char}>cloud.</motion.span>
+                <motion.span className="hero-word serif grad" variants={char}>cloud.</motion.span>
               </span>
             </motion.h1>
 
@@ -77,13 +70,9 @@ export default function Hero() {
 
           <motion.div className="hero-visual" initial={{ opacity: 0, scale: 0.86 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.5, duration: 1.3, ease: [0.22, 1, 0.36, 1] }}>
             <Globe />
-            {tags.map((t, i) => (
-              <span className={`hero-tag mono t${i + 1}`} key={t} aria-hidden="true"><i />{t}</span>
-            ))}
             <motion.div className="hero-console" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.3, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}>
-              <Tilt><DeployConsole /></Tilt>
+              <DeployConsole />
             </motion.div>
-            <span className="hero-drag mono" aria-hidden="true">drag to spin</span>
           </motion.div>
         </div>
       </motion.div>

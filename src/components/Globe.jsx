@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-const DOTS = 1150
+const DOTS = 1500
 const CAMERA = 3.2
 const REGIONS = [
   { name: 'ap-south-1', lat: 19.1, lon: 72.9 },
@@ -36,7 +36,7 @@ export default function Globe() {
       const y = 1 - (i / (DOTS - 1)) * 2
       const r = Math.sqrt(1 - y * y)
       const t = golden * i
-      return { v: [Math.cos(t) * r, y, Math.sin(t) * r], hue: 232 + 92 * ((y + 1) / 2) }
+      return { v: [Math.cos(t) * r, y, Math.sin(t) * r] }
     })
     const nodes = REGIONS.map((r) => ({ ...r, v: toVec(r) }))
     const arcs = LINKS.map(([a, b], i) => {
@@ -63,7 +63,7 @@ export default function Globe() {
       canvas.width = w * dpr
       canvas.height = h * dpr
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-      R = Math.min(w, h) * 0.33
+      R = Math.min(w, h) * 0.36
     }
 
     // Rotate by the globe's spin and tilt, then project with perspective.
@@ -88,10 +88,10 @@ export default function Globe() {
       ctx.clearRect(0, 0, w, h)
 
       // atmosphere
-      const g = ctx.createRadialGradient(w / 2, h / 2, R * 0.6, w / 2, h / 2, R * 1.55)
-      g.addColorStop(0, 'rgba(124, 134, 255, 0.20)')
-      g.addColorStop(0.55, 'rgba(244, 114, 182, 0.07)')
-      g.addColorStop(1, 'rgba(0, 0, 0, 0)')
+      const g = ctx.createRadialGradient(w / 2, h / 2, R * 0.9, w / 2, h / 2, R * 1.5)
+      g.addColorStop(0, 'rgba(165, 180, 252, 0)')
+      g.addColorStop(0.12, 'rgba(165, 180, 252, 0.13)')
+      g.addColorStop(1, 'rgba(165, 180, 252, 0)')
       ctx.fillStyle = g
       ctx.fillRect(0, 0, w, h)
 
@@ -107,16 +107,16 @@ export default function Globe() {
         for (let k = 0; k < 120; k++) {
           const a = ring((k / 120) * Math.PI * 2), b = ring(((k + 1) / 120) * Math.PI * 2)
           const behind = a[2] < 0 && Math.hypot(a[0] - w / 2, a[1] - h / 2) < R
-          ctx.strokeStyle = `rgba(185, 190, 255, ${behind ? 0.03 : 0.1 + 0.12 * (a[2] / rad + 1) / 2})`
+          ctx.strokeStyle = `rgba(255, 255, 255, ${behind ? 0.02 : 0.05 + 0.1 * (a[2] / rad + 1) / 2})`
           ctx.lineWidth = 1
           ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke()
         }
         const s = ring(now * sp + ri * 2)
         if (!(s[2] < 0 && Math.hypot(s[0] - w / 2, s[1] - h / 2) < R)) {
-          ctx.fillStyle = ri ? '#f472b6' : '#22d3ee'
-          ctx.shadowColor = ctx.fillStyle
-          ctx.shadowBlur = 14
-          ctx.beginPath(); ctx.arc(s[0], s[1], 3.2, 0, Math.PI * 2); ctx.fill()
+          ctx.fillStyle = '#fff'
+          ctx.shadowColor = '#fff'
+          ctx.shadowBlur = 8
+          ctx.beginPath(); ctx.arc(s[0], s[1], 2, 0, Math.PI * 2); ctx.fill()
           ctx.shadowBlur = 0
         }
       })
@@ -124,9 +124,9 @@ export default function Globe() {
       // sphere of dots
       for (const d of dots) {
         const [x, y, z, p] = project(d.v)
-        const a = z > 0 ? 0.3 + 0.7 * z : 0.07 + 0.07 * (1 + z)
-        ctx.fillStyle = `hsla(${d.hue + Math.sin(now * 0.0004) * 14}, 92%, ${z > 0 ? 74 : 60}%, ${a})`
-        const s = (z > 0 ? 1.35 : 0.9) * p
+        const a = z > 0 ? 0.22 + 0.7 * z : 0.05 + 0.05 * (1 + z)
+        ctx.fillStyle = `rgba(226, 230, 255, ${a})`
+        const s = (z > 0 ? 1.2 : 0.8) * p
         ctx.fillRect(x - s / 2, y - s / 2, s, s)
       }
 
@@ -137,7 +137,7 @@ export default function Globe() {
         for (let k = 1; k < arc.pts.length; k++) {
           const cur = project(arc.pts[k])
           const z = (prev[2] + cur[2]) / 2
-          ctx.strokeStyle = `rgba(34, 211, 238, ${z > 0 ? 0.25 + 0.5 * z : 0.05})`
+          ctx.strokeStyle = `rgba(199, 210, 254, ${z > 0 ? 0.18 + 0.45 * z : 0.04})`
           ctx.beginPath(); ctx.moveTo(prev[0], prev[1]); ctx.lineTo(cur[0], cur[1]); ctx.stroke()
           prev = cur
         }
@@ -148,9 +148,9 @@ export default function Globe() {
         const pk = project([A[0] + (B[0] - A[0]) * fr, A[1] + (B[1] - A[1]) * fr, A[2] + (B[2] - A[2]) * fr])
         if (pk[2] > -0.1) {
           ctx.fillStyle = '#fff'
-          ctx.shadowColor = '#22d3ee'
-          ctx.shadowBlur = 16
-          ctx.beginPath(); ctx.arc(pk[0], pk[1], 2.4 * pk[3], 0, Math.PI * 2); ctx.fill()
+          ctx.shadowColor = '#fff'
+          ctx.shadowBlur = 10
+          ctx.beginPath(); ctx.arc(pk[0], pk[1], 1.9 * pk[3], 0, Math.PI * 2); ctx.fill()
           ctx.shadowBlur = 0
         }
       }
@@ -161,16 +161,16 @@ export default function Globe() {
         const [x, y, z, p] = project(n.v)
         if (z < -0.05) return
         const pulse = ((now * 0.0008 + i * 0.3) % 1)
-        ctx.strokeStyle = `rgba(244, 114, 182, ${(1 - pulse) * 0.8 * Math.max(z, 0.15)})`
+        ctx.strokeStyle = `rgba(255, 255, 255, ${(1 - pulse) * 0.5 * Math.max(z, 0.15)})`
         ctx.lineWidth = 1
         ctx.beginPath(); ctx.arc(x, y, (4 + pulse * 15) * p, 0, Math.PI * 2); ctx.stroke()
         ctx.fillStyle = '#fff'
-        ctx.shadowColor = '#f472b6'
-        ctx.shadowBlur = 14
-        ctx.beginPath(); ctx.arc(x, y, 3 * p, 0, Math.PI * 2); ctx.fill()
+        ctx.shadowColor = '#c7d2fe'
+        ctx.shadowBlur = 10
+        ctx.beginPath(); ctx.arc(x, y, 2.4 * p, 0, Math.PI * 2); ctx.fill()
         ctx.shadowBlur = 0
         if (z > 0.3) {
-          ctx.fillStyle = `rgba(237, 237, 237, ${Math.min(1, (z - 0.3) * 1.8)})`
+          ctx.fillStyle = `rgba(237, 237, 237, ${Math.min(0.6, (z - 0.3) * 1.2)})`
           ctx.fillText(n.name, x + 9, y - 8)
         }
       })

@@ -2,7 +2,6 @@ import { profile, stats, education, marquee } from '../data'
 import { useCountUp, useInView } from '../hooks'
 import Reveal from './Reveal'
 import Heading from './Heading'
-import Scramble from './Scramble'
 import SpotlightCard from './SpotlightCard'
 
 function Stat({ s, start }) {
@@ -30,7 +29,7 @@ export default function About() {
   return (
     <section id="about" className="section about">
       <div className="container">
-        <Reveal><span className="eyebrow"><Scramble text="01 — About" /></span></Reveal>
+        <Reveal><span className="eyebrow">01 — About</span></Reveal>
         <Heading lines={[[{ t: 'I like problems that live' }], [{ t: 'between the' }, { t: 'app and the cloud.', grad: true }]]} />
 
         <div className="bento">

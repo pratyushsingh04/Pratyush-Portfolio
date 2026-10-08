@@ -2,9 +2,12 @@ import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { profile } from '../data'
 
+const STAGES = ['Provisioning', 'Building', 'Deploying', 'Live']
+const initials = `${profile.first[0]}${profile.last[0]}`
+
 /**
- * A sunrise: a warm arc rises from the bottom edge while the name fades in,
- * then the whole curtain lifts away to reveal the page.
+ * A quiet boot screen: a hairline ring closes around the initials while a
+ * large counter climbs and the stage word changes, then the screen wipes up.
  */
 export default function Loader({ onDone }) {
   const [visible, setVisible] = useState(true)
@@ -15,63 +18,58 @@ export default function Loader({ onDone }) {
     if (reduced) return finish()
     const iv = setInterval(() => {
       setPct((p) => {
-        const n = p + Math.random() * 9 + 5
+        const n = p + Math.random() * 7 + 4
         if (n >= 100) {
           clearInterval(iv)
-          setTimeout(finish, 460)
+          setTimeout(finish, 420)
           return 100
         }
         return n
       })
-    }, 125)
+    }, 95)
     return () => clearInterval(iv)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   function finish() {
     setVisible(false)
-    setTimeout(() => onDone?.(), 950)
+    setTimeout(() => onDone?.(), 700)
   }
+
+  const stage = pct >= 100 ? STAGES[3] : STAGES[Math.floor(pct / 34)]
 
   return (
     <AnimatePresence>
       {visible && (
         <motion.div
           className="loader"
-          exit={{ y: '-100%', transition: { duration: 0.9, ease: [0.76, 0, 0.24, 1] } }}
+          initial={{ clipPath: 'inset(0% 0% 0% 0%)' }}
+          exit={{ clipPath: 'inset(0% 0% 100% 0%)', transition: { duration: 0.95, ease: [0.76, 0, 0.24, 1] } }}
         >
-          {/* rising sun */}
-          <motion.span
-            className="loader-sun"
-            initial={{ y: 260, scale: 0.7, opacity: 0 }}
-            animate={{ y: 120 - pct * 1.5, scale: 0.7 + pct / 260, opacity: 0.25 + pct / 190 }}
-            transition={{ type: 'spring', stiffness: 40, damping: 18 }}
-          />
-          <span className="loader-horizon" />
-
-          <div className="loader-mid">
-            <motion.div
-              className="loader-name display"
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            >
-              {profile.name}
-            </motion.div>
-            <motion.div
-              className="loader-role mono"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.55, duration: 0.6 }}
-            >
-              {profile.role}
-            </motion.div>
+          <div className="loader-top mono">
+            <span>{profile.name}</span>
+            <span>Portfolio — {new Date().getFullYear()}</span>
           </div>
+
+          <motion.div className="loader-mid" initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}>
+            <svg className="loader-ring" viewBox="0 0 120 120" aria-hidden="true">
+              <circle className="lr-track" cx="60" cy="60" r="56" />
+              <circle className="lr-fill" cx="60" cy="60" r="56" pathLength="100" strokeDasharray="100" strokeDashoffset={100 - pct} />
+            </svg>
+            <span className="loader-mark display">{initials}</span>
+          </motion.div>
 
           <div className="loader-foot">
-            <div className="loader-bar"><span style={{ transform: `scaleX(${pct / 100})` }} /></div>
-            <span className="loader-pct mono">{String(Math.floor(pct)).padStart(3, '0')}</span>
+            <span className="loader-stage">
+              <AnimatePresence mode="wait">
+                <motion.span key={stage} className="serif" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25 }}>
+                  {stage}
+                </motion.span>
+              </AnimatePresence>
+            </span>
+            <span className="loader-pct display" aria-label={`Loading ${Math.floor(pct)} percent`}>{String(Math.floor(pct)).padStart(2, '0')}</span>
           </div>
+          <div className="loader-line"><span style={{ transform: `scaleX(${pct / 100})` }} /></div>
         </motion.div>
       )}
     </AnimatePresence>

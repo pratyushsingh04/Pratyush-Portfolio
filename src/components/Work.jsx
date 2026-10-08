@@ -4,7 +4,6 @@ import { projects } from '../data'
 import { useCountUp, useInView } from '../hooks'
 import Reveal from './Reveal'
 import Heading from './Heading'
-import Scramble from './Scramble'
 import ProjectVisual from './ProjectVisual'
 import Tilt from './Tilt'
 
@@ -28,7 +27,7 @@ function Shot({ p }) {
 
   return (
     <motion.div className="shot-wrap" ref={ref} style={{ y }}>
-      <Tilt max={6}>
+      <Tilt max={3}>
         <a className="shot" href={p.links.live} target="_blank" rel="noreferrer" aria-label={`Open ${p.name} — live site`}>
           <span className="shot-bar">
             <span className="shot-dots"><i /><i /><i /></span>
@@ -95,7 +94,7 @@ export default function Work() {
   return (
     <section id="work" className="section work">
       <div className="container">
-        <Reveal><span className="eyebrow"><Scramble text="02 — Selected work" /></span></Reveal>
+        <Reveal><span className="eyebrow">02 — Selected work</span></Reveal>
         <Heading lines={[[{ t: 'Two systems, built' }], [{ t: 'end to' }, { t: 'end.', grad: true }]]} />
         <Reveal delay={0.1}>
           <p className="lead">

@@ -20,7 +20,7 @@ export default function Heading({ lines, className = 'h2' }) {
             const parts = s.grad ? [s.t] : s.t.split(' ')
             return parts.flatMap((w, k) => [
               <span className="hw" key={`${j}-${k}`}>
-                <motion.span className={`hw-in ${s.grad ? 'grad' : ''}`} variants={word}>{w}</motion.span>
+                <motion.span className={`hw-in ${s.grad ? 'serif grad' : ''}`} variants={word}>{w}</motion.span>
               </span>,
               ' ',
             ])

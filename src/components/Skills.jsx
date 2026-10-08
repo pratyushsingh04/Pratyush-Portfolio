@@ -2,14 +2,13 @@ import { motion } from 'framer-motion'
 import { skills } from '../data'
 import Reveal, { parent, item } from './Reveal'
 import Heading from './Heading'
-import Scramble from './Scramble'
 import SpotlightCard from './SpotlightCard'
 
 export default function Skills() {
   return (
     <section id="skills" className="section skills">
       <div className="container">
-        <Reveal><span className="eyebrow"><Scramble text="03 — Toolkit" /></span></Reveal>
+        <Reveal><span className="eyebrow">03 — Toolkit</span></Reveal>
         <Heading lines={[[{ t: 'What I build' }, { t: 'with.', grad: true }]]} />
 
         <div className="skills-grid">
