@@ -17,6 +17,7 @@ export default function Nav() {
   const active = useActiveSection(ids)
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [theme, setTheme] = useState(() => document.documentElement.dataset.theme || 'light')
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.3 })
 
@@ -26,6 +27,13 @@ export default function Nav() {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  const flip = () => {
+    const next = theme === 'dark' ? 'light' : 'dark'
+    document.documentElement.dataset.theme = next
+    try { localStorage.setItem('theme', next) } catch { /* private mode */ }
+    setTheme(next)
+  }
 
   const go = (id) => (e) => {
     e.preventDefault()
@@ -57,6 +65,10 @@ export default function Nav() {
             </a>
           ))}
         </nav>
+
+        <button className="nav-toggle" onClick={flip} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}>
+          {theme === 'dark' ? '☀' : '☾'}
+        </button>
 
         <a className="nav-cta" href={profile.resume} download>
           Résumé <span className="nav-cta-i">↓</span>

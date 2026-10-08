@@ -1,6 +1,6 @@
-# SOLSTICE — Pratyush Singh
+# POP — Pratyush Singh
 
-A warm, premium portfolio built around a **sticky project showcase**. Conventional to navigate, deliberately not conventional to look at.
+A loud, colourful neo-brutalist portfolio built around a **sticky project showcase**. Conventional to navigate, deliberately not conventional to look at.
 
 **Stack:** React 18 · Vite · Framer Motion.
 

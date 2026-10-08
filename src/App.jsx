@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { MotionConfig } from 'framer-motion'
 import './App.css'
 
-import GlowCursor from './components/GlowCursor'
 import Loader from './components/Loader'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
@@ -17,15 +16,6 @@ export default function App() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="aurora" aria-hidden="true">
-        <span className="blob blob-1" />
-        <span className="blob blob-2" />
-        <span className="blob blob-3" />
-      </div>
-      <div className="aurora-veil" />
-      <div className="grain" />
-
-      <GlowCursor />
       <Loader onDone={() => setBooted(true)} />
 
       {booted && (
