@@ -26,7 +26,7 @@ function Score() {
   return (
     <div className="score">
       <div className="score-head">
-        <span className="score-n display grad">{overall}</span>
+        <span className="score-n display">{overall}</span>
         <span className="score-l mono">/ 100 · sample analysis</span>
       </div>
       <div className="score-rows">

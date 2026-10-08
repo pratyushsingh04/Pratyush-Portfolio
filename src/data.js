@@ -50,6 +50,7 @@ export const projects = [
     tagline: 'One workspace for service companies — HR, project delivery and a client portal, isolated per tenant and deployed on AWS.',
     accent: 'rose',
     visual: 'arch',
+    shot: './shots/worknest.jpg',
     links: {
       live: 'https://worknest-snowy-five.vercel.app',
       code: 'https://github.com/pratyushsingh04/worknest',
@@ -97,6 +98,7 @@ export const projects = [
     tagline: 'An AI outfit assistant that looks at a photo of what you are wearing and scores it for the occasion.',
     accent: 'amber',
     visual: 'score',
+    shot: './shots/wardrobe-ai.jpg',
     links: {
       live: 'https://wardrobe-ai-pearl.vercel.app',
       code: 'https://github.com/pratyushsingh04/wardrobe-ai',
@@ -170,9 +172,9 @@ export const certifications = [
 ]
 
 export const achievements = [
-  { title: '5-Star rating in C++', place: 'HackerRank', note: 'Earned by solving challenges across data structures and algorithms' },
-  { title: '300+ problems solved', place: 'LeetCode & others', note: 'Coding problems across LeetCode and other platforms' },
-  { title: 'Ranked under 500,000', place: 'LeetCode global', note: 'Global LeetCode ranking' },
+  { big: '5★', title: '5-Star rating in C++', place: 'HackerRank', note: 'Earned by solving challenges across data structures and algorithms' },
+  { big: '300+', title: '300+ problems solved', place: 'LeetCode & others', note: 'Coding problems across LeetCode and other platforms' },
+  { big: '<500K', title: 'Ranked under 500,000', place: 'LeetCode global', note: 'Global LeetCode ranking' },
 ]
 
 export const education = [

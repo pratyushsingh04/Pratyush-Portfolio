@@ -31,15 +31,15 @@ export default function Credentials() {
           ))}
         </div>
 
-        <div className="ach-list">
+        <div className="ach-grid">
           {achievements.map((a, i) => (
-            <Reveal className="ach" key={a.title} delay={0.05 + i * 0.05}>
-              <span className="ach-n mono">{String(i + 1).padStart(2, '0')}</span>
-              <div className="ach-body">
+            <Reveal key={a.title} delay={0.05 + i * 0.07}>
+              <SpotlightCard className="ach-card">
+                <span className="ach-place mono">{a.place}</span>
+                <span className="ach-big display grad">{a.big}</span>
                 <h4 className="ach-t">{a.title}</h4>
                 <p className="ach-note">{a.note}</p>
-              </div>
-              <span className="ach-place mono">{a.place}</span>
+              </SpotlightCard>
             </Reveal>
           ))}
         </div>

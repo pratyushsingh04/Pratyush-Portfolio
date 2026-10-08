@@ -1,87 +1,93 @@
 import { useRef } from 'react'
-import { motion, useScroll, useSpring } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { projects } from '../data'
 import { useCountUp, useInView } from '../hooks'
 import Reveal from './Reveal'
 import Heading from './Heading'
 import Scramble from './Scramble'
-import Tilt from './Tilt'
 import ProjectVisual from './ProjectVisual'
+import Tilt from './Tilt'
 
-/**
- * Each project is a sticky showcase: the summary card pins to the viewport
- * while its detailed points scroll past it, so the reader always knows which
- * project they are inside.
- */
 function Metric({ m }) {
   const num = /^(\d+)(\+?)$/.exec(m.k)
   const [ref, inView] = useInView({ threshold: 0.6 })
   const n = useCountUp(num ? Number(num[1]) : 0, { start: inView, duration: 1400 })
   return (
     <div className="pm" ref={ref}>
-      <span className="pm-k display grad">{num ? `${n}${num[2]}` : m.k}</span>
+      <span className="pm-k display">{num ? `${n}${num[2]}` : m.k}</span>
       <span className="pm-v mono">{m.v}</span>
     </div>
   )
 }
 
-function Showcase({ p }) {
-  const body = useRef(null)
-  const { scrollYProgress } = useScroll({ target: body, offset: ['start 75%', 'end 55%'] })
-  const fill = useSpring(scrollYProgress, { stiffness: 140, damping: 30, mass: 0.3 })
+/** The project's live site in a browser frame; drifts against the scroll and tilts. */
+function Shot({ p }) {
+  const ref = useRef(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
+  const y = useTransform(scrollYProgress, [0, 1], [50, -50])
 
   return (
-    <div className={`showcase accent-${p.accent}`}>
-      <div className="showcase-pin">
-        <div className="pin-sticky">
-          <Tilt max={5}>
-          <Reveal className="pin-card">
-          <div className="pin-top">
-            <span className="pin-index display">{p.index}</span>
-            <span className="pin-kind mono">{p.kind}</span>
+    <motion.div className="shot-wrap" ref={ref} style={{ y }}>
+      <Tilt max={6}>
+        <a className="shot" href={p.links.live} target="_blank" rel="noreferrer" aria-label={`Open ${p.name} — live site`}>
+          <span className="shot-bar">
+            <span className="shot-dots"><i /><i /><i /></span>
+            <span className="shot-url mono">{p.links.live.replace('https://', '')}</span>
+            <span className="shot-live mono"><i />live</span>
+          </span>
+          <span className="shot-img">
+            <img src={p.shot} alt={`${p.name} home page`} loading="lazy" width="800" height="500" />
+            <span className="shot-open mono">Open live site ↗</span>
+          </span>
+        </a>
+      </Tilt>
+    </motion.div>
+  )
+}
+
+function Project({ p }) {
+  return (
+    <article className={`proj accent-${p.accent}`}>
+      <div className="proj-head">
+        <Reveal className="proj-info">
+          <div className="proj-top mono">
+            <span className="proj-index">{p.index}</span>
+            <span className="proj-kind">{p.kind}</span>
           </div>
-          <h3 className="pin-name display">{p.name}</h3>
-          <p className="pin-tagline">{p.tagline}</p>
-
-          <ProjectVisual kind={p.visual} />
-
-          <div className="pin-metrics">
+          <h3 className="proj-name display">{p.name}</h3>
+          <p className="proj-tagline">{p.tagline}</p>
+          <div className="proj-metrics">
             {p.metrics.map((m) => <Metric key={m.v} m={m} />)}
           </div>
-
           <div className="pin-stack">
             {p.stack.map((s) => <span className="chip" key={s}>{s}</span>)}
           </div>
           <div className="pin-foot">
-            <span className="pin-period mono">{p.period}</span>
             <span className="pin-links mono">
               <a href={p.links.live} target="_blank" rel="noreferrer">Live <i>↗</i></a>
               <a href={p.links.code} target="_blank" rel="noreferrer">Code <i>↗</i></a>
             </span>
+            <span className="pin-period mono">{p.period}</span>
           </div>
-          </Reveal>
-          </Tilt>
-        </div>
+        </Reveal>
+        <Shot p={p} />
       </div>
 
-      <div className="showcase-body" ref={body}>
-        <span className="rail" aria-hidden="true"><motion.span className="rail-fill" style={{ scaleY: fill }} /></span>
+      <Reveal className="proj-visual">
+        <span className="b-k mono">{p.visual === 'arch' ? 'How it is deployed' : 'What it returns'}</span>
+        <ProjectVisual kind={p.visual} />
+      </Reveal>
+
+      <div className={`proj-points cols-${p.points.length % 3 === 0 ? 3 : 2}`}>
         {p.points.map((pt, i) => (
-          <motion.div
-            className="point"
-            key={i}
-            initial={{ opacity: 0.22, x: 26 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ margin: '-30% 0px -30% 0px' }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          >
+          <Reveal className="point" key={i} delay={(i % 3) * 0.07}>
             <span className="point-n mono">{String(i + 1).padStart(2, '0')}</span>
             <h4 className="point-h">{pt.h}</h4>
             <p className="point-p">{pt.p}</p>
-          </motion.div>
+          </Reveal>
         ))}
       </div>
-    </div>
+    </article>
   )
 }
 
@@ -99,8 +105,8 @@ export default function Work() {
           </p>
         </Reveal>
 
-        <div className="showcases">
-          {projects.map((p) => <Showcase key={p.id} p={p} />)}
+        <div className="projects">
+          {projects.map((p) => <Project key={p.id} p={p} />)}
         </div>
       </div>
     </section>
