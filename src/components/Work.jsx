@@ -4,6 +4,7 @@ import { projects } from '../data'
 import { useCountUp, useInView } from '../hooks'
 import Reveal from './Reveal'
 import Heading from './Heading'
+import Scramble from './Scramble'
 import Tilt from './Tilt'
 import ProjectVisual from './ProjectVisual'
 
@@ -66,11 +67,18 @@ function Showcase({ p }) {
       <div className="showcase-body" ref={body}>
         <span className="rail" aria-hidden="true"><motion.span className="rail-fill" style={{ scaleY: fill }} /></span>
         {p.points.map((pt, i) => (
-          <Reveal className="point" key={i} delay={0.04}>
+          <motion.div
+            className="point"
+            key={i}
+            initial={{ opacity: 0.22, x: 26 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ margin: '-30% 0px -30% 0px' }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
             <span className="point-n mono">{String(i + 1).padStart(2, '0')}</span>
             <h4 className="point-h">{pt.h}</h4>
             <p className="point-p">{pt.p}</p>
-          </Reveal>
+          </motion.div>
         ))}
       </div>
     </div>
@@ -81,7 +89,7 @@ export default function Work() {
   return (
     <section id="work" className="section work">
       <div className="container">
-        <Reveal><span className="eyebrow">02 — Selected work</span></Reveal>
+        <Reveal><span className="eyebrow"><Scramble text="02 — Selected work" /></span></Reveal>
         <Heading lines={[[{ t: 'Two systems, built' }], [{ t: 'end to' }, { t: 'end.', grad: true }]]} />
         <Reveal delay={0.1}>
           <p className="lead">

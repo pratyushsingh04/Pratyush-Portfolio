@@ -1,13 +1,14 @@
 import { certifications, achievements } from '../data'
 import Reveal from './Reveal'
 import Heading from './Heading'
+import Scramble from './Scramble'
 import SpotlightCard from './SpotlightCard'
 
 export default function Credentials() {
   return (
     <section id="credentials" className="section creds">
       <div className="container">
-        <Reveal><span className="eyebrow">04 — Credentials</span></Reveal>
+        <Reveal><span className="eyebrow"><Scramble text="04 — Credentials" /></span></Reveal>
         <Heading lines={[[{ t: 'Certified, and' }, { t: 'practised.', grad: true }]]} />
 
         <div className="cert-grid">

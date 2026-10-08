@@ -3,11 +3,22 @@ import { profile, marquee } from '../data'
 import Magnetic from './Magnetic'
 import DeployConsole from './DeployConsole'
 import Tilt from './Tilt'
+import Starfield from './Starfield'
 
-const line = {
-  hidden: { y: '110%' },
-  show: (i) => ({ y: 0, transition: { delay: 0.35 + i * 0.11, duration: 0.9, ease: [0.22, 1, 0.36, 1] } }),
+const title = { hidden: {}, show: { transition: { staggerChildren: 0.03, delayChildren: 0.25 } } }
+const char = {
+  hidden: { y: '0.5em', opacity: 0, filter: 'blur(14px)', rotateX: -80 },
+  show: { y: 0, opacity: 1, filter: 'blur(0px)', rotateX: 0, transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] } },
 }
+
+// Split into words (kept unbreakable) of individually animated characters.
+const chars = (text) =>
+  text.split(' ').flatMap((w, i) => [
+    <span className="hero-word" key={i}>
+      {[...w].map((c, j) => <motion.span className="hero-char" key={j} variants={char}>{c}</motion.span>)}
+    </span>,
+    ' ',
+  ])
 
 export default function Hero() {
   const { scrollYProgress } = useScroll()
@@ -18,6 +29,8 @@ export default function Hero() {
 
   return (
     <section id="home" className="hero">
+      <Starfield />
+      <div className="hero-beams" aria-hidden="true"><i /><i /><i /><i /><i /></div>
       <motion.div className="container hero-in" style={{ y, opacity }}>
         <motion.div className="hero-badge" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}>
           <span className="hero-ping" />
@@ -26,21 +39,13 @@ export default function Hero() {
           <span className="mono">{profile.location}</span>
         </motion.div>
 
-        <h1 className="hero-title display">
-          {profile.headline.map((l, i) => (
-            <span className="hero-line" key={i}>
-              <motion.span className="hero-line-in" custom={i} variants={line} initial="hidden" animate="show">
-                {i === 1 ? (
-                  <>
-                    shipped to the <span className="grad">cloud.</span>
-                  </>
-                ) : (
-                  l
-                )}
-              </motion.span>
-            </span>
-          ))}
-        </h1>
+        <motion.h1 className="hero-title display" aria-label={profile.headline.join(' ')} variants={title} initial="hidden" animate="show">
+          <span className="hero-line" aria-hidden="true">{chars(profile.headline[0])}</span>
+          <span className="hero-line" aria-hidden="true">
+            {chars('shipped to the')}{' '}
+            <motion.span className="hero-word grad" variants={char}>cloud.</motion.span>
+          </span>
+        </motion.h1>
 
         <div className="hero-row">
         <div className="hero-copy">

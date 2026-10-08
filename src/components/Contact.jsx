@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { profile } from '../data'
 import Reveal from './Reveal'
 import Heading from './Heading'
+import Scramble from './Scramble'
 import Magnetic from './Magnetic'
 
 export default function Contact() {
@@ -21,7 +22,7 @@ export default function Contact() {
       <div className="container">
         <div className="contact-card">
           <span className="contact-halo" aria-hidden="true" />
-          <Reveal><span className="eyebrow">05 — Contact</span></Reveal>
+          <Reveal><span className="eyebrow"><Scramble text="05 — Contact" /></span></Reveal>
           <Heading className="contact-h display" lines={[[{ t: "Let's build something" }], [{ t: 'worth shipping.', grad: true }]]} />
           <Reveal delay={0.1}>
             <p className="contact-lead">

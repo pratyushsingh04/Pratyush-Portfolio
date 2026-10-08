@@ -3,6 +3,8 @@ import { MotionConfig } from 'framer-motion'
 import './App.css'
 
 import Loader from './components/Loader'
+import Cursor from './components/Cursor'
+import ScrollBand from './components/ScrollBand'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -16,6 +18,7 @@ export default function App() {
 
   return (
     <MotionConfig reducedMotion="user">
+      <Cursor />
       <Loader onDone={() => setBooted(true)} />
 
       {booted && (
@@ -24,9 +27,11 @@ export default function App() {
           <main>
             <Hero />
             <About />
+            <ScrollBand text="Build · Ship · Scale ·" />
             <Work />
             <Skills />
             <Credentials />
+            <ScrollBand text="Let’s talk ·" reverse />
             <Contact />
           </main>
         </>
