@@ -1,11 +1,12 @@
-import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { projects } from '../data'
 import { useCountUp, useInView } from '../hooks'
 import Reveal from './Reveal'
 import Heading from './Heading'
 import ProjectVisual from './ProjectVisual'
-import Tilt from './Tilt'
+
+const ADVANCE_MS = 4500
 
 function Metric({ m }) {
   const num = /^(\d+)(\+?)$/.exec(m.k)
@@ -19,62 +20,98 @@ function Metric({ m }) {
   )
 }
 
-/** The project's live site in a browser frame; drifts against the scroll and tilts. */
-function Shot({ p }) {
-  const ref = useRef(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const y = useTransform(scrollYProgress, [0, 1], [50, -50])
+/**
+ * Real screens from the live site in a browser frame. Steps through them on
+ * its own while on screen; picking a thumbnail takes over.
+ */
+function Gallery({ p }) {
+  const [ref, inView] = useInView({ threshold: 0.35 })
+  const [at, setAt] = useState(0)
+  const [auto, setAuto] = useState(true)
+  const shot = p.shots[at]
+
+  useEffect(() => {
+    if (!inView || !auto) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const id = setTimeout(() => setAt((i) => (i + 1) % p.shots.length), ADVANCE_MS)
+    return () => clearTimeout(id)
+  }, [inView, auto, at, p.shots.length])
+
+  const pick = (i) => () => { setAuto(false); setAt(i) }
 
   return (
-    <motion.div className="shot-wrap" ref={ref} style={{ y }}>
-      <Tilt max={3}>
-        <a className="shot" href={p.links.live} target="_blank" rel="noreferrer" aria-label={`Open ${p.name} — live site`}>
-          <span className="shot-bar">
-            <span className="shot-dots"><i /><i /><i /></span>
-            <span className="shot-url mono">{p.links.live.replace('https://', '')}</span>
-            <span className="shot-live mono"><i />live</span>
-          </span>
-          <span className="shot-img">
-            <img src={p.shot} alt={`${p.name} home page`} loading="lazy" width="800" height="500" />
-            <span className="shot-open mono">Open live site ↗</span>
-          </span>
-        </a>
-      </Tilt>
-    </motion.div>
+    <div className="gal" ref={ref}>
+      <div className="gal-frame">
+        <div className="shot-bar">
+          <span className="shot-dots"><i /><i /><i /></span>
+          <a className="shot-url mono" href={p.links.live} target="_blank" rel="noreferrer">{p.links.live.replace('https://', '')}</a>
+          <span className="shot-live mono"><i />live</span>
+        </div>
+        <div className="gal-view">
+          <AnimatePresence initial={false}>
+            <motion.img
+              key={shot.src}
+              src={shot.src}
+              alt={`${p.name} — ${shot.cap}`}
+              width="1280"
+              height="800"
+              initial={{ opacity: 0, scale: 1.03 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            />
+          </AnimatePresence>
+          <span className="gal-cap mono">{String(at + 1).padStart(2, '0')} / {String(p.shots.length).padStart(2, '0')} · {shot.cap}</span>
+        </div>
+      </div>
+
+      <div className="gal-thumbs" style={{ gridTemplateColumns: `repeat(${p.shots.length}, 1fr)` }}>
+        {p.shots.map((s, i) => (
+          <button className={`gal-thumb ${i === at ? 'on' : ''} ${auto && inView ? 'auto' : ''}`} key={s.src} onClick={pick(i)} aria-label={`Show ${s.cap}`} aria-pressed={i === at}>
+            <img src={s.thumb} alt="" loading="lazy" width="360" height="225" />
+            <span className="gal-thumb-c mono">{s.cap}</span>
+          </button>
+        ))}
+      </div>
+    </div>
   )
 }
 
 function Project({ p }) {
   return (
-    <article className={`proj accent-${p.accent}`}>
-      <div className="proj-head">
-        <Reveal className="proj-info">
+    <article id={p.id} className="proj">
+      <Reveal className="proj-hd">
+        <div>
           <div className="proj-top mono">
             <span className="proj-index">{p.index}</span>
             <span className="proj-kind">{p.kind}</span>
+            <span className="proj-kind">{p.period}</span>
           </div>
           <h3 className="proj-name display">{p.name}</h3>
+        </div>
+        <span className="pin-links mono">
+          <a href={p.links.live} target="_blank" rel="noreferrer">Open live site <i>↗</i></a>
+          <a href={p.links.code} target="_blank" rel="noreferrer">Source code <i>↗</i></a>
+        </span>
+      </Reveal>
+
+      <Reveal delay={0.08}><Gallery p={p} /></Reveal>
+
+      <div className="proj-sum">
+        <Reveal>
           <p className="proj-tagline">{p.tagline}</p>
-          <div className="proj-metrics">
-            {p.metrics.map((m) => <Metric key={m.v} m={m} />)}
-          </div>
           <div className="pin-stack">
             {p.stack.map((s) => <span className="chip" key={s}>{s}</span>)}
           </div>
-          <div className="pin-foot">
-            <span className="pin-links mono">
-              <a href={p.links.live} target="_blank" rel="noreferrer">Live <i>↗</i></a>
-              <a href={p.links.code} target="_blank" rel="noreferrer">Code <i>↗</i></a>
-            </span>
-            <span className="pin-period mono">{p.period}</span>
-          </div>
         </Reveal>
-        <Shot p={p} />
+        <Reveal className="proj-metrics" delay={0.08}>
+          {p.metrics.map((m) => <Metric key={m.v} m={m} />)}
+        </Reveal>
       </div>
 
       <Reveal className="proj-visual">
-        <span className="b-k mono">{p.visual === 'arch' ? 'How it is deployed' : 'What it returns'}</span>
-        <ProjectVisual kind={p.visual} />
+        <span className="b-k mono">{p.flowTitle}</span>
+        <ProjectVisual flow={p.flow} label={p.flowLabel} />
       </Reveal>
 
       <div className={`proj-points cols-${p.points.length % 3 === 0 ? 3 : 2}`}>
@@ -94,13 +131,12 @@ export default function Work() {
   return (
     <section id="work" className="section work">
       <div className="container">
-        <Reveal><span className="eyebrow">02 — Selected work</span></Reveal>
+        <Reveal><span className="eyebrow">01 — Projects</span></Reveal>
         <Heading lines={[[{ t: 'Two systems, built' }], [{ t: 'end to' }, { t: 'end.', grad: true }]]} />
         <Reveal delay={0.1}>
           <p className="lead">
-            From schema design and authorization to real-time features, LLM integration and
-            cloud deployment — both are live, and both are projects I would want to talk
-            through in an interview.
+            Both are deployed and open to try. The screens below are the live sites as they
+            look today — click through them, or open the real thing.
           </p>
         </Reveal>
 

@@ -25,8 +25,8 @@ export default function App() {
           <CommandPalette />
           <main>
             <Hero />
-            <About />
             <Work />
+            <About />
             <Skills />
             <Credentials />
             <Contact />

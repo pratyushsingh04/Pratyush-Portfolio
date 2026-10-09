@@ -29,17 +29,6 @@ export const stats = [
 
 export const marquee = ['AWS EC2', 'Docker', 'Next.js', 'TypeScript', 'Node.js', 'Express', 'PostgreSQL', 'Prisma', 'Socket.IO', 'React.js', 'Python', 'FastAPI', 'MongoDB', 'Vercel', 'Neon']
 
-// Lines the hero console types out — the real WorkNest deployment.
-export const consoleLines = [
-  { t: 'cmd', text: 'whoami' },
-  { t: 'out', text: "pratyush · cloud & full-stack engineer · VIT Bhopal '27" },
-  { t: 'cmd', text: 'deploy worknest --prod' },
-  { t: 'ok', k: 'web', text: 'Next.js', to: 'Vercel' },
-  { t: 'ok', k: 'api', text: 'Express · Socket.IO', to: 'AWS EC2' },
-  { t: 'ok', k: 'db', text: 'PostgreSQL · Prisma', to: 'Neon' },
-  { t: 'live', text: '85+ endpoints · 23 models · 4 roles' },
-]
-
 export const projects = [
   {
     id: 'worknest',
@@ -49,8 +38,22 @@ export const projects = [
     period: 'Oct 2025 — Present',
     tagline: 'One workspace for service companies — HR, project delivery and a client portal, isolated per tenant and deployed on AWS.',
     accent: 'rose',
-    visual: 'arch',
-    shot: './shots/worknest.jpg',
+    shots: [
+      { src: './shots/worknest-1.jpg', thumb: './shots/worknest-1-t.jpg', cap: 'Landing' },
+      { src: './shots/worknest-2.jpg', thumb: './shots/worknest-2-t.jpg', cap: 'Platform pillars' },
+      { src: './shots/worknest-3.jpg', thumb: './shots/worknest-3-t.jpg', cap: 'A working day' },
+      { src: './shots/worknest-4.jpg', thumb: './shots/worknest-4-t.jpg', cap: 'Live boards' },
+      { src: './shots/worknest-5.jpg', thumb: './shots/worknest-5-t.jpg', cap: 'Capabilities' },
+    ],
+    flowTitle: 'How it is deployed',
+    flowLabel: 'Next.js on Vercel talks over REST and WebSockets to Express and Socket.IO on AWS EC2, which reaches PostgreSQL on Neon through Prisma',
+    flow: [
+      { k: 'Vercel', v: 'Next.js' },
+      { link: 'REST · WSS' },
+      { k: 'AWS EC2', v: 'Express · Socket.IO' },
+      { link: 'Prisma' },
+      { k: 'Neon', v: 'PostgreSQL' },
+    ],
     links: {
       live: 'https://worknest-snowy-five.vercel.app',
       code: 'https://github.com/pratyushsingh04/worknest',
@@ -97,8 +100,21 @@ export const projects = [
     period: 'Oct 2026',
     tagline: 'An AI outfit assistant that looks at a photo of what you are wearing and scores it for the occasion.',
     accent: 'amber',
-    visual: 'score',
-    shot: './shots/wardrobe-ai.jpg',
+    shots: [
+      { src: './shots/wardrobe-ai-1.jpg', thumb: './shots/wardrobe-ai-1-t.jpg', cap: 'Landing' },
+      { src: './shots/wardrobe-ai-2.jpg', thumb: './shots/wardrobe-ai-2-t.jpg', cap: 'Outfit check' },
+      { src: './shots/wardrobe-ai-3.jpg', thumb: './shots/wardrobe-ai-3-t.jpg', cap: 'The lookbook' },
+      { src: './shots/wardrobe-ai-4.jpg', thumb: './shots/wardrobe-ai-4-t.jpg', cap: 'How it works' },
+    ],
+    flowTitle: 'How a check runs',
+    flowLabel: 'The browser sends a compressed photo to Next.js API routes, which ask a vision LLM (Gemini or Claude) for Zod-validated JSON',
+    flow: [
+      { k: 'Browser', v: 'photo · event' },
+      { link: 'REST' },
+      { k: 'Next.js', v: 'API routes · SQLite' },
+      { link: 'Zod JSON' },
+      { k: 'Vision LLM', v: 'Gemini · Claude' },
+    ],
     links: {
       live: 'https://wardrobe-ai-pearl.vercel.app',
       code: 'https://github.com/pratyushsingh04/wardrobe-ai',
@@ -129,23 +145,6 @@ export const projects = [
     ],
     stack: ['Next.js', 'React', 'TypeScript', 'Gemini API', 'Claude API', 'SQLite', 'Zod', 'Tailwind CSS'],
   },
-]
-
-// WorkNest's deployed topology, drawn in its showcase card.
-export const architecture = [
-  { k: 'Vercel', v: 'Next.js' },
-  { link: 'REST · WSS' },
-  { k: 'AWS EC2', v: 'Express · Socket.IO' },
-  { link: 'Prisma' },
-  { k: 'Neon', v: 'PostgreSQL' },
-]
-
-// Illustrative output for the Wardrobe AI showcase card.
-export const sampleScore = [
-  { k: 'Formality', v: 90 },
-  { k: 'Coordination', v: 84 },
-  { k: 'Weather', v: 78 },
-  { k: 'Event', v: 92 },
 ]
 
 export const skills = [

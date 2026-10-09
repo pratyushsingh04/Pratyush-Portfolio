@@ -1,8 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { profile } from '../data'
+import { profile, projects } from '../data'
 import Magnetic from './Magnetic'
-import DeployConsole from './DeployConsole'
-import Globe from './Globe'
 
 const title = { hidden: {}, show: { transition: { staggerChildren: 0.022, delayChildren: 0.2 } } }
 const char = {
@@ -19,12 +17,15 @@ const chars = (text) =>
     ' ',
   ])
 
+const go = (id) => (e) => {
+  e?.preventDefault()
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
 export default function Hero() {
   const { scrollYProgress } = useScroll()
   const y = useTransform(scrollYProgress, [0, 0.16], [0, -60])
   const opacity = useTransform(scrollYProgress, [0, 0.13], [1, 0])
-
-  const go = (id) => () => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
 
   return (
     <section id="home" className="hero">
@@ -47,14 +48,15 @@ export default function Hero() {
             </motion.h1>
 
             <motion.p className="hero-sub" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.85, duration: 0.7 }}>
-              I'm <strong>{profile.name}</strong> — a {profile.role.toLowerCase()} who builds secure,
-              multi-tenant platforms, real-time services and REST APIs, then deploys them on AWS.
+              I'm <strong>{profile.name}</strong>, a final-year CSE student at VIT Bhopal. I built{' '}
+              <a href="#worknest" onClick={go('worknest')}>WorkNest</a>, a multi-tenant SaaS running on AWS, and{' '}
+              <a href="#wardrobe-ai" onClick={go('wardrobe-ai')}>Wardrobe AI</a>, an outfit assistant on vision LLMs. Both are live.
             </motion.p>
 
             <motion.div className="hero-cta" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1, duration: 0.7 }}>
               <Magnetic>
                 <button className="btn btn-sun" onClick={go('work')}>
-                  <span>View my work</span><span className="bi">→</span>
+                  <span>See the projects</span><span className="bi">→</span>
                 </button>
               </Magnetic>
               <Magnetic strength={0.2}>
@@ -68,18 +70,32 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          <motion.div className="hero-visual" initial={{ opacity: 0, scale: 0.86 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.5, duration: 1.3, ease: [0.22, 1, 0.36, 1] }}>
-            <Globe />
-            <motion.div className="hero-console" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.3, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}>
-              <DeployConsole />
-            </motion.div>
-          </motion.div>
+          {/* The two projects themselves, as they look live. */}
+          <div className="hero-stack">
+            {projects.map((p, i) => (
+              <motion.a
+                className={`hs hs-${i + 1}`}
+                href={`#${p.id}`}
+                onClick={go(p.id)}
+                key={p.id}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.55 + i * 0.18, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <span className="hs-bar">
+                  <span className="shot-dots"><i /><i /><i /></span>
+                  <span className="hs-url mono">{p.links.live.replace('https://', '')}</span>
+                </span>
+                <img src={p.shots[0].src} alt={`${p.name} — live site`} width="1280" height="800" />
+                <span className="hs-cap">
+                  <b>{p.name}</b>
+                  <span className="mono">{p.kind}</span>
+                </span>
+              </motion.a>
+            ))}
+          </div>
         </div>
       </motion.div>
-
-      <button className="hero-scroll mono" onClick={go('about')} aria-label="Scroll to about">
-        <span className="hero-mouse"><i /></span>scroll
-      </button>
     </section>
   )
 }

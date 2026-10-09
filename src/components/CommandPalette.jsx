@@ -7,8 +7,8 @@ const open = (url) => () => window.open(url, '_blank', 'noopener,noreferrer')
 
 const commands = [
   { group: 'Go to', label: 'Home', hint: 'Section', run: go('home') },
+  { group: 'Go to', label: 'Projects', hint: 'Section', run: go('work') },
   { group: 'Go to', label: 'About', hint: 'Section', run: go('about') },
-  { group: 'Go to', label: 'Work', hint: 'Section', run: go('work') },
   { group: 'Go to', label: 'Skills', hint: 'Section', run: go('skills') },
   { group: 'Go to', label: 'Credentials', hint: 'Section', run: go('credentials') },
   { group: 'Go to', label: 'Contact', hint: 'Section', run: go('contact') },

@@ -29,7 +29,7 @@ export default function About() {
   return (
     <section id="about" className="section about">
       <div className="container">
-        <Reveal><span className="eyebrow">01 — About</span></Reveal>
+        <Reveal><span className="eyebrow">02 — About</span></Reveal>
         <Heading lines={[[{ t: 'I like problems that live' }], [{ t: 'between the' }, { t: 'app and the cloud.', grad: true }]]} />
 
         <div className="bento">

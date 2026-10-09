@@ -5,8 +5,8 @@ import { profile } from '../data'
 
 const items = [
   { id: 'home', label: 'Home' },
+  { id: 'work', label: 'Projects' },
   { id: 'about', label: 'About' },
-  { id: 'work', label: 'Work' },
   { id: 'skills', label: 'Skills' },
   { id: 'credentials', label: 'Credentials' },
   { id: 'contact', label: 'Contact' },
