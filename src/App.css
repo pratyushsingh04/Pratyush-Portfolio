@@ -1167,3 +1167,28 @@
 
 .nav-k kbd { white-space: nowrap; }
 @media (max-width: 620px) { .nav-role { display: none; } }
+
+/* Intro v2 — who I am, then the stack assembling layer by layer */
+.intro { padding: 24px; gap: 0; }
+.intro::before { content: ''; position: absolute; left: 50%; top: 50%; width: min(90vw, 760px); height: 520px; transform: translate(-50%, -50%); background: radial-gradient(closest-side, rgba(165, 180, 252, 0.14), transparent); pointer-events: none; }
+.intro-box { position: relative; width: min(100%, 560px); }
+.intro-who { display: flex; flex-direction: column; gap: 6px; }
+.intro-name { font-size: clamp(2.2rem, 7vw, 3.6rem); font-weight: 500; line-height: 1; color: #fff; }
+.intro-role { font-size: clamp(1.05rem, 2.6vw, 1.35rem); color: var(--text); margin-top: 8px; }
+.intro-role i { color: var(--accent-2); font-size: 1.15em; }
+.intro-about { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); margin-top: 4px; }
+
+.intro-stack { margin-top: clamp(26px, 5vw, 40px); border-top: 1px solid var(--line-2); }
+.intro-layer { position: relative; display: grid; grid-template-columns: 30px 96px 1fr; align-items: baseline; gap: 10px; padding: 13px 0; border-bottom: 1px solid var(--line-2); opacity: 0.22; transform: translateX(-10px); transition: opacity 0.45s var(--ease), transform 0.45s var(--ease); }
+.intro-layer.on { opacity: 1; transform: none; }
+.il-n { font-size: 0.66rem; color: var(--faint); }
+.il-k { font-size: 1rem; font-weight: 500; letter-spacing: -0.02em; color: #fff; }
+.il-v { font-size: 0.74rem; color: var(--muted); text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.il-bar { position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; overflow: hidden; }
+.il-bar i { display: block; height: 100%; background: linear-gradient(90deg, #fff, var(--accent)); transform: scaleX(0); transform-origin: left; transition: transform 0.5s var(--ease); }
+.intro-layer.on .il-bar i { transform: scaleX(1); }
+.intro-foot { display: block; margin-top: 18px; font-size: 0.66rem; letter-spacing: 0.08em; color: var(--faint); }
+@media (max-width: 520px) {
+  .intro-layer { grid-template-columns: 24px 82px 1fr; }
+  .il-v { font-size: 0.64rem; }
+}
