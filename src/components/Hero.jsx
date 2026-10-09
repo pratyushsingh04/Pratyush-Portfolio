@@ -17,6 +17,14 @@ const chars = (text) =>
     ' ',
   ])
 
+// A few facts about me, straight from the résumé.
+const facts = [
+  { k: 'Studying', v: 'B.Tech CSE, VIT Bhopal', s: 'Cloud Computing & Automation · 2027' },
+  { k: 'CGPA', v: '8.00 / 10', s: 'VIT Bhopal University' },
+  { k: 'Problem solving', v: '300+ DSA problems', s: '5★ in C++ on HackerRank' },
+  { k: 'Certified', v: 'Azure Data Fundamentals', s: 'Microsoft' },
+]
+
 const go = (id) => (e) => {
   e?.preventDefault()
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -95,6 +103,15 @@ export default function Hero() {
             ))}
           </div>
         </div>
+
+        <motion.dl className="hero-facts" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2, duration: 0.8 }}>
+          {facts.map((f) => (
+            <div className="hero-fact" key={f.k}>
+              <dt className="mono">{f.k}</dt>
+              <dd>{f.v}<span>{f.s}</span></dd>
+            </div>
+          ))}
+        </motion.dl>
       </motion.div>
     </section>
   )

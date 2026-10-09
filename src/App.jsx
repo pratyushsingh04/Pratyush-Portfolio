@@ -4,6 +4,7 @@ import './App.css'
 
 import Loader from './components/Loader'
 import CommandPalette from './components/CommandPalette'
+import IntroCard from './components/IntroCard'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -23,6 +24,7 @@ export default function App() {
         <>
           <Nav />
           <CommandPalette />
+          <IntroCard />
           <main>
             <Hero />
             <Work />
