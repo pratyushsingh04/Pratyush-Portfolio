@@ -990,3 +990,96 @@
   .ide-n { flex-basis: 34px; padding-right: 10px; }
   .ide-lang { display: none; }
 }
+
+/* ============================================================
+   Loader v5 — a realistic editor window (VS Code "Dark Modern")
+   ============================================================ */
+.vsc {
+  position: relative;
+  width: min(94vw, 980px);
+  display: flex; flex-direction: column;
+  border-radius: 10px;
+  border: 1px solid #2b2b2b;
+  background: #1f1f1f;
+  color: #cccccc;
+  font-family: 'Segoe UI', var(--font-body);
+  font-size: 13px;
+  box-shadow: 0 60px 140px -30px #000, 0 0 120px -50px rgba(0, 120, 212, 0.55);
+  overflow: hidden;
+  text-align: left;
+}
+.vsc-title { position: relative; display: flex; align-items: center; height: 34px; padding: 0 12px; background: #181818; border-bottom: 1px solid #2b2b2b; }
+.vsc-dots { display: inline-flex; gap: 7px; }
+.vsc-dots i { width: 11px; height: 11px; border-radius: 50%; background: #ff5f57; }
+.vsc-dots i:nth-child(2) { background: #febc2e; }
+.vsc-dots i:nth-child(3) { background: #28c840; }
+.vsc-title-t { position: absolute; left: 50%; transform: translateX(-50%); font-size: 12px; color: #9d9d9d; white-space: nowrap; }
+
+.vsc-main { display: grid; grid-template-columns: 46px 196px minmax(0, 1fr); }
+.vsc-act { display: flex; flex-direction: column; align-items: center; gap: 4px; padding-top: 8px; background: #181818; border-right: 1px solid #2b2b2b; }
+.vsc-act span { width: 100%; height: 42px; display: grid; place-items: center; color: #868686; border-left: 2px solid transparent; }
+.vsc-act span.on { color: #d7d7d7; border-left-color: #0078d4; }
+.vsc-act svg { width: 22px; height: 22px; }
+
+.vsc-side { display: flex; flex-direction: column; padding-bottom: 10px; background: #181818; border-right: 1px solid #2b2b2b; white-space: nowrap; overflow: hidden; }
+.vsc-side-h { padding: 11px 18px 9px; font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; color: #cccccc; }
+.vsc-side-root { padding: 3px 8px; font-size: 11px; font-weight: 700; color: #cccccc; }
+.vsc-file { display: flex; align-items: center; gap: 6px; height: 22px; padding-right: 12px; color: #cccccc; }
+.vsc-file.on { background: #37373d; color: #fff; }
+.vsc-file b { margin-left: auto; font-size: 11px; font-weight: 400; color: #e2c08d; }
+.vsc-chev { font-style: normal; width: 16px; text-align: center; color: #9d9d9d; }
+.vsc-ic { display: inline-grid; place-items: center; width: 16px; font-style: normal; font-size: 8.5px; font-weight: 700; letter-spacing: -0.04em; color: #3178c6; }
+.vsc-ic.json { color: #cbcb41; }
+.vsc-ic.md { color: #519aba; }
+
+.vsc-edit { display: flex; flex-direction: column; min-width: 0; }
+.vsc-tabs { display: flex; height: 35px; background: #181818; border-bottom: 1px solid #2b2b2b; }
+.vsc-tab { display: inline-flex; align-items: center; gap: 6px; padding: 0 12px; border-right: 1px solid #2b2b2b; color: #9d9d9d; white-space: nowrap; }
+.vsc-tab.on { background: #1f1f1f; color: #fff; box-shadow: inset 0 1px 0 #0078d4; margin-bottom: -1px; }
+.vsc-tab b { width: 16px; text-align: center; font-weight: 400; color: #cccccc; }
+.vsc-tab b.dot { font-size: 10px; }
+.vsc-crumbs { display: flex; align-items: center; gap: 5px; height: 22px; padding: 0 16px; font-size: 12px; color: #a9a9a9; white-space: nowrap; overflow: hidden; }
+.vsc-crumbs i { font-style: normal; color: #6e6e6e; }
+
+.vsc-code { display: grid; grid-template-columns: minmax(0, 1fr) 62px; padding: 4px 0 8px; font-family: Consolas, 'Cascadia Code', var(--font-mono); font-size: 13.5px; line-height: 20px; }
+.vsc-line { display: flex; height: 20px; }
+.vsc-line.on { box-shadow: inset 0 0 0 1px #282828; background: rgba(255, 255, 255, 0.02); }
+.vsc-n { flex: 0 0 52px; padding-right: 18px; text-align: right; color: #6e7681; user-select: none; }
+.vsc-line.on .vsc-n { color: #cccccc; }
+.vsc-t { white-space: pre; overflow: hidden; }
+.vt-k { color: #569cd6; }
+.vt-kc { color: #c586c0; }
+.vt-t { color: #4ec9b0; }
+.vt-n { color: #9cdcfe; }
+.vt-s { color: #ce9178; }
+.vt-f { color: #dcdcaa; }
+.vt-p { color: #d4d4d4; }
+.vsc-caret { display: inline-block; width: 2px; height: 17px; background: #aeafad; vertical-align: text-bottom; animation: caret 1s steps(1) infinite; }
+.vsc-caret.blk { width: 7px; height: 14px; background: #cccccc; }
+.vsc-map { display: flex; flex-direction: column; gap: 2px; padding: 3px 8px 0; border-left: 1px solid #262626; }
+.vsc-map i { height: 2px; border-radius: 1px; background: rgba(156, 220, 254, 0.35); transition: width 0.2s linear; }
+
+.vsc-panel { border-top: 1px solid #2b2b2b; background: #181818; }
+.vsc-panel-h { display: flex; gap: 22px; padding: 9px 16px 7px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; color: #9d9d9d; white-space: nowrap; overflow: hidden; }
+.vsc-panel-h .on { color: #e7e7e7; box-shadow: 0 6px 0 -5px #0078d4; padding-bottom: 5px; margin-bottom: -5px; }
+.vsc-term { height: 176px; padding: 4px 16px 10px; font-family: Consolas, 'Cascadia Code', var(--font-mono); font-size: 12.5px; line-height: 19px; color: #cccccc; overflow: hidden; }
+.tl { white-space: pre; overflow: hidden; text-overflow: ellipsis; }
+.tl-dim { color: #8b8b8b; }
+.tl-out { color: #58a6ff; }
+.tl-tick, .tl-path { color: #3fb950; }
+.tl-br { color: #58a6ff; }
+
+.vsc-status { display: flex; align-items: center; gap: 14px; height: 22px; padding-right: 12px; background: #181818; border-top: 1px solid #2b2b2b; font-family: 'Segoe UI', var(--font-body); font-size: 11.5px; color: #cccccc; white-space: nowrap; overflow: hidden; }
+.vsc-remote { align-self: stretch; display: grid; place-items: center; width: 34px; background: #0078d4; color: #fff; font-size: 10px; letter-spacing: -0.1em; }
+.vsc-sp { flex: 1; }
+
+@media (max-width: 760px) {
+  .vsc-main { grid-template-columns: minmax(0, 1fr); }
+  .vsc-act, .vsc-side, .vsc-map, .vsc-status .hide-s { display: none; }
+  .vsc-code { grid-template-columns: minmax(0, 1fr); font-size: 11.5px; }
+  .vsc-n { flex-basis: 34px; padding-right: 10px; }
+  .vsc-term { font-size: 11px; height: 170px; padding: 4px 12px 10px; }
+  .vsc-panel-h { gap: 14px; padding: 9px 12px 7px; }
+  .vsc-title-t { font-size: 11px; }
+  .tl-path, .tl-br { display: none; }
+}
