@@ -8,7 +8,7 @@ export default function Skills() {
   return (
     <section id="skills" className="section skills">
       <div className="container">
-        <Reveal><span className="eyebrow">03 — Toolkit</span></Reveal>
+        <Reveal><span className="eyebrow">04 — Toolkit</span></Reveal>
         <Heading lines={[[{ t: 'What I build' }, { t: 'with.', grad: true }]]} />
 
         <div className="skills-grid">

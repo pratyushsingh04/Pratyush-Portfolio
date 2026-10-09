@@ -4,7 +4,6 @@ import { profile, projects, stats, education } from '../data'
 
 const STAY_MS = 5200
 const stack = ['Next.js', 'React', 'TypeScript', 'Node.js', 'Express', 'PostgreSQL', 'AWS EC2', 'Docker']
-const initials = `${profile.first[0]}${profile.last[0]}`
 
 /**
  * A profile card shown once the page has loaded: everything about me at a
@@ -59,7 +58,7 @@ export default function IntroCard() {
             onMouseLeave={() => setHold(false)}
           >
             <header className="idc-head">
-              <span className="idc-avatar display" aria-hidden="true">{initials}</span>
+              <img className="idc-photo" src="./me.jpg" alt={`Portrait of ${profile.name}`} width="400" height="400" />
               <div className="idc-id">
                 <h2 className="idc-name display">{profile.name}</h2>
                 <p className="idc-role">Full-Stack &amp; Cloud Engineer</p>

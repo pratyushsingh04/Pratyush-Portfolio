@@ -1245,3 +1245,20 @@
   .idc-foot { justify-content: center; }
 }
 @media (max-width: 520px) { .idc-stack { display: none; } .idc-bio { font-size: 0.9rem; margin-top: 14px; } .idc { padding: 20px; } }
+
+
+/* ============================================================
+   Photo, contact directly under the hero, standalone footer
+   ============================================================ */
+.nav-photo { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(255, 255, 255, 0.25); }
+.idc-photo { flex: 0 0 84px; width: 84px; height: 84px; border-radius: 20px; object-fit: cover; border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 18px 40px -16px #000; }
+.idc-head { align-items: center; gap: 16px; }
+.idc-name { font-size: 1.6rem; }
+
+.contact { padding: clamp(40px, 6vw, 80px) 0 clamp(60px, 8vw, 110px); overflow: visible; border-top: none; }
+.contact-card { padding: clamp(34px, 5vw, 64px) clamp(22px, 5vw, 60px); }
+.contact-h { font-size: clamp(1.9rem, 4.6vw, 3.2rem); }
+
+.site-foot { border-top: 1px solid var(--line-2); padding-top: clamp(30px, 5vw, 56px); overflow: hidden; }
+.site-foot .footer { margin-top: 0; padding-top: 0; border-top: none; }
+@media (max-width: 520px) { .idc-photo { flex-basis: 68px; width: 68px; height: 68px; border-radius: 16px; } }

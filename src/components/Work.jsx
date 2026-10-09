@@ -131,7 +131,7 @@ export default function Work() {
   return (
     <section id="work" className="section work">
       <div className="container">
-        <Reveal><span className="eyebrow">01 — Projects</span></Reveal>
+        <Reveal><span className="eyebrow">02 — Projects</span></Reveal>
         <Heading lines={[[{ t: 'Two systems, built' }], [{ t: 'end to' }, { t: 'end.', grad: true }]]} />
         <Reveal delay={0.1}>
           <p className="lead">

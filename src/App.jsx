@@ -12,6 +12,7 @@ import Work from './components/Work'
 import Skills from './components/Skills'
 import Credentials from './components/Credentials'
 import Contact from './components/Contact'
+import Footer from './components/Footer'
 
 export default function App() {
   const [booted, setBooted] = useState(false)
@@ -27,12 +28,13 @@ export default function App() {
           <IntroCard />
           <main>
             <Hero />
+            <Contact />
             <Work />
             <About />
             <Skills />
             <Credentials />
-            <Contact />
           </main>
+          <Footer />
         </>
       )}
     </MotionConfig>

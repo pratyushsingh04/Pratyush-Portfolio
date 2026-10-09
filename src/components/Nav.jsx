@@ -5,11 +5,11 @@ import { profile } from '../data'
 
 const items = [
   { id: 'home', label: 'Home' },
+  { id: 'contact', label: 'Contact' },
   { id: 'work', label: 'Projects' },
   { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
   { id: 'credentials', label: 'Credentials' },
-  { id: 'contact', label: 'Contact' },
 ]
 const ids = items.map((i) => i.id)
 
@@ -42,7 +42,7 @@ export default function Nav() {
         transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
       >
         <a href="#home" className="nav-brand" onClick={go('home')}>
-          <span className="nav-mark" />
+          <img className="nav-photo" src="./me-sm.jpg" alt="" width="96" height="96" />
           <span className="nav-brand-txt">
             <span className="nav-name">{profile.name}</span>
             <span className="nav-role mono">{profile.role}</span>

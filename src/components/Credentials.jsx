@@ -7,7 +7,7 @@ export default function Credentials() {
   return (
     <section id="credentials" className="section creds">
       <div className="container">
-        <Reveal><span className="eyebrow">04 — Credentials</span></Reveal>
+        <Reveal><span className="eyebrow">05 — Credentials</span></Reveal>
         <Heading lines={[[{ t: 'Certified, and' }, { t: 'practised.', grad: true }]]} />
 
         <div className="cert-grid">

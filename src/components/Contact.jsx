@@ -21,7 +21,7 @@ export default function Contact() {
       <div className="container">
         <div className="contact-card">
           <span className="contact-halo" aria-hidden="true" />
-          <Reveal><span className="eyebrow">05 — Contact</span></Reveal>
+          <Reveal><span className="eyebrow">01 — Contact</span></Reveal>
           <Heading className="contact-h display" lines={[[{ t: "Let's build something" }], [{ t: 'worth shipping.', grad: true }]]} />
           <Reveal delay={0.1}>
             <p className="contact-lead">
@@ -50,15 +50,7 @@ export default function Contact() {
           </Reveal>
         </div>
 
-        <footer className="footer">
-          <span className="footer-name">{profile.name}</span>
-          <span className="footer-note mono">Built with React &amp; Framer Motion · {new Date().getFullYear()}</span>
-          <button className="footer-top mono" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            Back to top ↑
-          </button>
-        </footer>
       </div>
-      <div className="wordmark display" aria-hidden="true">{profile.name}</div>
     </section>
   )
 }
